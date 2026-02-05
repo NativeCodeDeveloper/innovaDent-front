@@ -5,8 +5,8 @@ import CarritoProvider from "@/ContextosGlobales/CarritoContext";
 import ToasterClient from "@/Componentes/ToasterClient";
 import ObjetoPagarProvider from "@/ContextosGlobales/ObjetoPagarContext";
 import FloatingWhatsApp from "@/Componentes/FloatingWhatsApp";
-import FooterSiluetaChic from "@/Componentes/Footer";
-import SeccionContacto from "@/app/(public)/seccionContacto/page";
+
+
 
 
 export default function PublicLayout({ children }) {
@@ -15,15 +15,13 @@ export default function PublicLayout({ children }) {
             <CarritoProvider>
                 <div className="relative">
                     <ToasterClient />
-                    <nav className="sticky top-0 z-50">
-                        <ShadcnNavBar />
-                    </nav>
+         
                     <main className="relative z-0">{children}</main>
 
                     <FloatingWhatsApp/>
                     <br/><br/><br/><br/>
-                    <SeccionContacto></SeccionContacto>
-                    <FooterSiluetaChic/>
+                 
+     
 
                 </div>
             </CarritoProvider>
