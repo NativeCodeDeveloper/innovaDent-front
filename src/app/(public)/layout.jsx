@@ -1,6 +1,6 @@
 'use client'
 // src/app/(public)/layout.jsx
-import {ShadcnNavBar} from "@/Componentes/shadcnNavBar";
+import {NavBarInnovaDent} from "@/Componentes/NavBarInnovaDent";
 import CarritoProvider from "@/ContextosGlobales/CarritoContext";
 import ToasterClient from "@/Componentes/ToasterClient";
 import ObjetoPagarProvider from "@/ContextosGlobales/ObjetoPagarContext";
@@ -15,14 +15,12 @@ export default function PublicLayout({ children }) {
             <CarritoProvider>
                 <div className="relative">
                     <ToasterClient />
-         
-                    <main className="relative z-0">{children}</main>
+                    <NavBarInnovaDent />
+
+                    {/* Add padding-top to account for fixed navbar */}
+                    <main className="relative z-0 pt-[120px]">{children}</main>
 
                     <FloatingWhatsApp/>
-                    <br/><br/><br/><br/>
-                 
-     
-
                 </div>
             </CarritoProvider>
         </ObjetoPagarProvider>

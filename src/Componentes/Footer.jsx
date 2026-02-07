@@ -33,49 +33,43 @@ function WhatsAppIcon({ className = "" }) {
 }
 
 const socials = [
-    { name: "Facebook", href: "https://www.facebook.com/profile.php?id=61586147694822", icon: Facebook },
-    { name: "Instagram", href: "https://www.instagram.com/siluetachicoficial/", icon: Instagram },
-    { name: "TikTok", href: "https://www.tiktok.com/@silueta.chic?_r=1&_t=ZM-91rfsGhFSQN", icon: TikTokIcon },
-    { name: "WhatsApp", href: "https://wa.me/56977173029", icon: WhatsAppIcon },
+    { name: "Facebook", href: "https://www.facebook.com/innovadent", icon: Facebook },
+    { name: "Instagram", href: "https://www.instagram.com/innovadent", icon: Instagram },
+    { name: "WhatsApp", href: "https://wa.me/56912345678", icon: WhatsAppIcon },
 ];
 
-export default function FooterSiluetaChic() {
+export default function Footer() {
     return (
-        <footer className="bg-neutral-950 text-neutral-300">
-            <div className="mx-auto max-w-6xl px-6 pt-14">
+        <footer id="contacto" className="relative bg-linear-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-300 overflow-hidden">
+            {/* Efecto de resplandor de fondo */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-teal-900/20 via-transparent to-transparent"></div>
+
+            <div className="relative z-10 mx-auto max-w-6xl px-6 pt-14">
                 {/* Top grid */}
                 <div className="grid gap-10 md:grid-cols-4">
                     {/* Brand */}
                     <div>
-                        <h3 className="text-lg font-semibold text-white">Silueta Chic Estudio</h3>
-                        <p className="mt-4 text-sm leading-6 text-neutral-400">
-                            Especialistas en Depilación Triláser avanzada sin dolor en el corazón de Ñuñoa. Tecnología de última generación para resultados visibles, seguros y duraderos desde la primera sesión.
+                        <h3 className="text-lg font-semibold text-white">InnovaDent</h3>
+                        <p className="mt-4 text-sm leading-6 text-gray-400">
+                            Clínica dental en Talca con más de 15 años de experiencia.
+                            Tecnología de vanguardia para tu mejor sonrisa.
                         </p>
 
-                        <div className="mt-6 flex items-center gap-4">
+                        <div className="mt-6 flex items-center gap-3">
                             {/* Social icons */}
-                            <div className="flex items-center gap-3">
-                                {socials.map((s) => {
-                                    const Icon = s.icon;
-                                    return (
-                                        <a
-                                            key={s.name}
-                                            href={s.href}
-                                            aria-label={s.name}
-                                            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white/90 ring-1 ring-white/10 transition hover:bg-white/15 hover:text-indigo-600"
-                                        >
-                                            <Icon className="h-5 w-5" />
-                                        </a>
-                                    );
-                                })}
-                            </div>
-
-                            {/* Brand icon */}
-                            <img
-                                src="/logofooter.png"
-                                alt="Silueta Chic"
-                                className="h-40 w-auto object-contain opacity-90"
-                            />
+                            {socials.map((s) => {
+                                const Icon = s.icon;
+                                return (
+                                    <a
+                                        key={s.name}
+                                        href={s.href}
+                                        aria-label={s.name}
+                                        className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white/90 ring-1 ring-white/10 transition hover:bg-white/15 hover:text-white"
+                                    >
+                                        <Icon className="h-5 w-5" />
+                                    </a>
+                                );
+                            })}
                         </div>
                     </div>
 
@@ -83,17 +77,17 @@ export default function FooterSiluetaChic() {
                     {/* Quick links */}
                     <div>
                         <h3 className="text-lg font-semibold text-white">Enlaces Rápidos</h3>
-                        <ul className="mt-4 space-y-3 text-sm text-neutral-400">
+                        <ul className="mt-4 space-y-3 text-sm text-gray-400">
                             {[
                                 ["Inicio", "/"],
-                                ["Depilacion Mujer", "/catalogo"],
-                                ["Depilacion Hombre", "/catalogo"],
-                                ["Agenda tus Sesiones", "/AgendaProceso"],
+                                ["Servicios", "#seccion1"],
+                                ["Agendar Hora", "/AgendaProceso"],
+                                ["Contacto", "#contacto"],
                             ].map(([label, href]) => (
                                 <li key={label}>
                                     <Link
                                         href={href}
-                                        className="transition hover:text-indigo-600"
+                                        className="transition hover:text-teal-400"
                                     >
                                         {label}
                                     </Link>
@@ -104,16 +98,18 @@ export default function FooterSiluetaChic() {
 
                     {/* Info */}
                     <div>
-                        <h3 className="text-lg font-semibold text-white">Información</h3>
-                        <ul className="mt-4 space-y-3 text-sm text-neutral-400">
+                        <h3 className="text-lg font-semibold text-white">Servicios</h3>
+                        <ul className="mt-4 space-y-3 text-sm text-gray-400">
                             {[
-                                ["Cuidados Previos", "/dudas"],
-                                ["Cuidados Posteriores", "/dudas"],
-                                ["Preguntas frecuentes", "/dudas"],
-                                ["Prohibiciones", "/dudas"],
+                                ["Ortodoncia", "#seccion1"],
+                                ["Endodoncia", "#seccion1"],
+                                ["Cirugía Dental", "#seccion1"],
+                                ["Diseño de Sonrisa", "#seccion1"],
+                                ["Prótesis Dentales", "#seccion1"],
+                                ["Armonización Facial", "#seccion1"],
                             ].map(([label, href]) => (
                                 <li key={label}>
-                                    <Link href={href} className="transition hover:text-indigo-600">
+                                    <Link href={href} className="transition hover:text-teal-400">
                                         {label}
                                     </Link>
                                 </li>
@@ -126,79 +122,74 @@ export default function FooterSiluetaChic() {
                     <div>
                         <h3 className="text-lg font-semibold text-white">Contacto</h3>
 
-                        <ul className="mt-4 space-y-3 text-sm text-neutral-400">
+                        <ul className="mt-4 space-y-3 text-sm text-gray-400">
                             <li className="flex gap-3">
-                                <MapPin className="mt-0.5 h-5 w-5 flex-none text-white/80" />
+                                <MapPin className="mt-0.5 h-5 w-5 flex-none text-teal-400" />
                                 <span>
-                     Avenida Irarrázaval 1989, Oficina 204 placa sur, Ñuñoa
-                      </span>
+                                    1 Norte 1337, Talca, Región del Maule, Chile
+                                </span>
                             </li>
 
                             <li className="flex items-center gap-3">
-                                <Phone className="h-5 w-5 flex-none text-white/80" />
-                                <a href="tel:+56977173029" className="hover:text-indigo-600">
-                                    +56 9 7717 3029
+                                <Phone className="h-5 w-5 flex-none text-teal-400" />
+                                <a href="tel:+56712345678" className="hover:text-white transition-colors">
+                                    +56 71 234 5678
                                 </a>
                             </li>
 
                             <li className="flex items-center gap-3">
-                                <Mail className="h-5 w-5 flex-none text-white/80" />
+                                <Mail className="h-5 w-5 flex-none text-teal-400" />
                                 <a
-                                    href="mailto:siluetachicestudio@gmail.com"
-                                    className="hover:text-indigo-600"
+                                    href="mailto:contacto@innovadent.cl"
+                                    className="hover:text-white transition-colors"
                                 >
-                                    siluetachicestudio@gmail.com
+                                    contacto@innovadent.cl
                                 </a>
                             </li>
 
                             <li className="flex items-center gap-3">
-                                <WhatsAppIcon className="h-5 w-5 flex-none text-white/80" />
+                                <WhatsAppIcon className="h-5 w-5 flex-none text-teal-400" />
                                 <a
-                                    href="https://wa.me/56977173029"
-                                    className="hover:text-indigo-600"
+                                    href="https://wa.me/56912345678"
+                                    className="hover:text-white transition-colors"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
                                     WhatsApp
                                 </a>
                             </li>
-
-
-
-
                         </ul>
                     </div>
                 </div>
 
                 {/* Map */}
-                <div className="mt-12 overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10">
+                <div className="mt-12 overflow-hidden rounded-2xl bg-white/5 ring-1 ring-teal-500/20">
                     <div className="relative aspect-[16/6] w-full">
                         <iframe
-                            className="absolute inset-0 w-full h-full"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3328.833121608925!2d-70.61308342614629!3d-33.453653997673065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf8e24e33aef%3A0xc87340a985daad3!2sAv.%20Irarr%C3%A1zaval%201989%2C%207750000%20%C3%91u%C3%B1oa%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl"
+                            title="Mapa - InnovaDent Talca"
+                            className="absolute inset-0 h-full w-full"
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            allowFullScreen
+                            src="https://www.google.com/maps?q=1+Norte+1337,+Talca,+Regi%C3%B3n+del+Maule,+Chile&output=embed"
                         />
                     </div>
                 </div>
 
                 {/* Bottom */}
-                <div className="mt-10 border-t border-white/10 py-8 text-center">
-                    <p className="text-sm text-neutral-500">
-                        © {new Date().getFullYear()} Silueta.Chic. Todos los derechos
-                        reservados.
+                <div className="mt-10 border-t border-teal-500/20 py-8 text-center">
+                    <p className="text-sm text-gray-500">
+                        © {new Date().getFullYear()} InnovaDent. Todos los derechos reservados.
                     </p>
-                    <p className="mt-3 text-sm text-neutral-600">
-                        Depilación Triláser Avanzada - Santiago, Chile
+                    <p className="mt-3 text-sm text-gray-600">
+                        Clínica Dental Profesional - Talca, Chile
                     </p>
-                    <p className="mt-2 text-xs text-neutral-600">
+                    <p className="mt-2 text-xs text-gray-600">
                       Plataforma desarrollada por{" "}
                       <a
                         href="https://nativecode.cl"
                         target="_blank"
                         rel="noreferrer"
-                        className="font-medium text-neutral-500 hover:text-indigo-600 transition"
+                        className="font-medium text-gray-500 hover:text-teal-400 transition"
                       >
                         NativeCode.cl
                       </a>

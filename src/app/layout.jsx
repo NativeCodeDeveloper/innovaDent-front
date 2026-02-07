@@ -4,40 +4,40 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { AnimatedLayout } from "@/Componentes/AnimatedLayout";
 import AgendaProvider from "@/ContextosGlobales/AgendaContext";
 
-// Metadata optimizada SEO para Silueta Chic – Centro de Depilación Triláser en Ñuñoa, Santiago
+// Metadata optimizada SEO para InnovaDent – Clínica Dental Profesional
 export const metadataBase = new URL(
-  process.env.NEXT_PUBLIC_SITE_URL || "https://siluetachic.cl"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://innovadent.cl"
 );
 
 export const metadata = {
   title: {
-    default: "Silueta Chic | Centro de Depilación Triláser en Ñuñoa",
-    template: "%s | Silueta Chic",
+    default: "InnovaDent | Clínica Dental Profesional",
+    template: "%s | InnovaDent",
   },
   description:
-    "Silueta Chic es un centro profesional de depilación triláser en Ñuñoa, Santiago. Especialistas en depilación corporal femenina y masculina, tratamientos seguros, tecnología avanzada y atención personalizada.",
+    "InnovaDent es una clínica dental profesional que ofrece tratamientos personalizados de la más alta calidad. Especialistas en salud dental, diseñados para tu bienestar y felicidad.",
   icons: {
-    icon: "/silueta.ico",
-    shortcut: "/silueta.ico",
-    apple: "/silueta.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   keywords: [
-    "depilación triláser",
-    "depilación láser Santiago",
-    "depilación láser Ñuñoa",
-    "centro de depilación",
-    "depilación corporal",
-    "depilación profesional",
-    "depilación femenina",
-    "depilación masculina",
-    "depilación definitiva",
-    "Silueta Chic",
-    "depilación láser clínica estética",
-    "triláser Ñuñoa",
-    "centro de estética Santiago",
+    "clínica dental",
+    "dentista",
+    "odontología",
+    "tratamientos dentales",
+    "implantes dentales",
+    "ortodoncia",
+    "blanqueamiento dental",
+    "estética dental",
+    "salud bucal",
+    "InnovaDent",
+    "clínica dental profesional",
+    "odontología integral",
+    "cuidado dental",
   ],
-  authors: [{ name: "Silueta Chic", url: metadataBase.href }],
-  publisher: "Silueta Chic",
+  authors: [{ name: "InnovaDent", url: metadataBase.href }],
+  publisher: "InnovaDent",
   robots: {
     index: true,
     follow: true,
@@ -54,17 +54,17 @@ export const metadata = {
     canonical: metadataBase.href,
   },
   openGraph: {
-    title: "Silueta Chic | Depilación Triláser Profesional en Ñuñoa",
+    title: "InnovaDent | Clínica Dental Profesional",
     description:
-      "Centro especializado en depilación triláser en Ñuñoa, Santiago. Resultados efectivos, tecnología avanzada y especialistas en depilación corporal.",
+      "Descubre tratamientos personalizados de la más alta calidad, diseñados para tu salud y felicidad. En InnovaDent, nos especializamos en brindar una experiencia única.",
     url: metadataBase.href,
-    siteName: "Silueta Chic",
+    siteName: "InnovaDent",
     images: [
       {
-        url: `${metadataBase.href.replace(/\/$/, "")}/og-silueta-chic.png`,
+        url: `${metadataBase.href.replace(/\/$/, "")}/og-innovadent.png`,
         width: 1200,
         height: 630,
-        alt: "Silueta Chic - Centro de Depilación Triláser",
+        alt: "InnovaDent - Clínica Dental Profesional",
       },
     ],
     locale: "es_CL",
@@ -72,10 +72,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Silueta Chic | Depilación Triláser en Ñuñoa",
+    title: "InnovaDent | Clínica Dental Profesional",
     description:
-      "Depilación triláser profesional en Ñuñoa, Santiago. Especialistas en depilación corporal con tecnología avanzada.",
-    images: [`${metadataBase.href.replace(/\/$/, "")}/og-silueta-chic.png`],
+      "Tratamientos dentales personalizados de la más alta calidad. Especialistas en salud bucal y estética dental.",
+    images: [`${metadataBase.href.replace(/\/$/, "")}/og-innovadent.png`],
   },
 };
 

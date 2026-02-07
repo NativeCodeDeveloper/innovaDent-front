@@ -41,16 +41,19 @@ const socials = [
 
 export default function Footer() {
     return (
-        <footer className="bg-neutral-950 text-neutral-300">
-            <div className="mx-auto max-w-6xl px-6 pt-14">
+        <footer className="relative bg-linear-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-300 overflow-hidden">
+            {/* Efecto de resplandor de fondo */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-teal-900/20 via-transparent to-transparent"></div>
+
+            <div className="relative z-10 mx-auto max-w-6xl px-6 pt-14">
                 {/* Top grid */}
                 <div className="grid gap-10 md:grid-cols-4">
                     {/* Brand */}
                     <div>
-                        <h3 className="text-lg font-semibold text-white">Silueta.Chic</h3>
-                        <p className="mt-4 text-sm leading-6 text-neutral-400">
-                            Especialistas en depilación triláser avanzada. Tecnología de última
-                            generación para resultados visibles y duraderos.
+                        <h3 className="text-lg font-semibold text-white">InnovaDent</h3>
+                        <p className="mt-4 text-sm leading-6 text-gray-400">
+                            Clínica dental en Talca con más de 15 años de experiencia.
+                            Tecnología de vanguardia para tu mejor sonrisa.
                         </p>
 
                         <div className="mt-6 flex items-center gap-3">
@@ -73,19 +76,17 @@ export default function Footer() {
                     {/* Quick links */}
                     <div>
                         <h3 className="text-lg font-semibold text-white">Enlaces Rápidos</h3>
-                        <ul className="mt-4 space-y-3 text-sm text-neutral-400">
+                        <ul className="mt-4 space-y-3 text-sm text-gray-400">
                             {[
-                                ["Inicio", "/"],
-                                ["Hombre", "/hombre"],
-                                ["Mujer", "/mujer"],
-                                ["Servicios", "/servicios"],
-                                ["Dudas", "/dudas"],
-                                ["Contacto", "/contacto"],
+                                ["Inicio", "/portada"],
+                                ["Servicios", "/portada#servicios"],
+                                ["Agendar Hora", "/AgendaProceso"],
+                                ["Contacto", "/portada#contacto"],
                             ].map(([label, href]) => (
                                 <li key={label}>
                                     <Link
                                         href={href}
-                                        className="transition hover:text-white"
+                                        className="transition hover:text-teal-400"
                                     >
                                         {label}
                                     </Link>
@@ -96,16 +97,18 @@ export default function Footer() {
 
                     {/* Info */}
                     <div>
-                        <h3 className="text-lg font-semibold text-white">Información</h3>
-                        <ul className="mt-4 space-y-3 text-sm text-neutral-400">
+                        <h3 className="text-lg font-semibold text-white">Servicios</h3>
+                        <ul className="mt-4 space-y-3 text-sm text-gray-400">
                             {[
-                                ["Cuidados Pre y Post", "/cuidados"],
-                                ["Prohibiciones", "/prohibiciones"],
-                                ["Términos y Condiciones", "/terminos"],
-                                ["Contacto", "/contacto"],
+                                ["Ortodoncia", "/"],
+                                ["Endodoncia", "/"],
+                                ["Cirugía Dental", "/"],
+                                ["Diseño de Sonrisa", "/"],
+                                ["Prótesis Dentales", "/"],
+                                ["Armonización Facial", "/"],
                             ].map(([label, href]) => (
                                 <li key={label}>
-                                    <Link href={href} className="transition hover:text-white">
+                                    <Link href={href} className="transition hover:text-teal-400">
                                         {label}
                                     </Link>
                                 </li>
@@ -117,37 +120,36 @@ export default function Footer() {
                     <div>
                         <h3 className="text-lg font-semibold text-white">Contacto</h3>
 
-                        <ul className="mt-4 space-y-3 text-sm text-neutral-400">
+                        <ul className="mt-4 space-y-3 text-sm text-gray-400">
                             <li className="flex gap-3">
-                                <MapPin className="mt-0.5 h-5 w-5 flex-none text-white/80" />
+                                <MapPin className="mt-0.5 h-5 w-5 flex-none text-teal-400" />
                                 <span>
-                  Avenida Irarrázaval 1989, oficina 204 placa sur, Ñuñoa,
-                  Santiago
+                  1 Norte 1337, Talca, Región del Maule, Chile
                 </span>
                             </li>
 
                             <li className="flex items-center gap-3">
-                                <Phone className="h-5 w-5 flex-none text-white/80" />
-                                <a href="tel:+56981396016" className="hover:text-white">
-                                    +56 9 8139 6016
+                                <Phone className="h-5 w-5 flex-none text-teal-400" />
+                                <a href="tel:+56712345678" className="hover:text-white transition-colors">
+                                    +56 71 234 5678
                                 </a>
                             </li>
 
                             <li className="flex items-center gap-3">
-                                <Mail className="h-5 w-5 flex-none text-white/80" />
+                                <Mail className="h-5 w-5 flex-none text-teal-400" />
                                 <a
-                                    href="mailto:silueta.chic200@gmail.com"
-                                    className="hover:text-white"
+                                    href="mailto:contacto@innovadent.cl"
+                                    className="hover:text-white transition-colors"
                                 >
-                                    silueta.chic200@gmail.com
+                                    contacto@innovadent.cl
                                 </a>
                             </li>
 
                             <li className="flex items-center gap-3">
-                                <WhatsAppIcon className="h-5 w-5 flex-none text-white/80" />
+                                <WhatsAppIcon className="h-5 w-5 flex-none text-teal-400" />
                                 <a
-                                    href="https://wa.me/56981396016"
-                                    className="hover:text-white"
+                                    href="https://wa.me/56912345678"
+                                    className="hover:text-white transition-colors"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
@@ -159,26 +161,26 @@ export default function Footer() {
                 </div>
 
                 {/* Map */}
-                <div className="mt-12 overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10">
+                <div className="mt-12 overflow-hidden rounded-2xl bg-white/5 ring-1 ring-teal-500/20">
                     <div className="relative aspect-[16/6] w-full">
                         <iframe
-                            title="Mapa - Av. Irarrázaval 1989"
+                            title="Mapa - InnovaDent Talca"
                             className="absolute inset-0 h-full w-full"
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            src="https://www.google.com/maps?q=Av.%20Irarr%C3%A1zaval%201989%2C%20%C3%91u%C3%B1oa%2C%20Santiago%2C%20Chile&output=embed"
+                            src="https://www.google.com/maps?q=1+Norte+1337,+Talca,+Regi%C3%B3n+del+Maule,+Chile&output=embed"
                         />
                     </div>
                 </div>
 
                 {/* Bottom */}
-                <div className="mt-10 border-t border-white/10 py-8 text-center">
-                    <p className="text-sm text-neutral-500">
-                        © {new Date().getFullYear()} Silueta.Chic. Todos los derechos
+                <div className="mt-10 border-t border-teal-500/20 py-8 text-center">
+                    <p className="text-sm text-gray-500">
+                        © {new Date().getFullYear()} InnovaDent. Todos los derechos
                         reservados.
                     </p>
-                    <p className="mt-3 text-sm text-neutral-600">
-                        Depilación Triláser Avanzada - Santiago, Chile
+                    <p className="mt-3 text-sm text-gray-600">
+                        Clínica Dental Profesional - Talca, Chile
                     </p>
                 </div>
             </div>
