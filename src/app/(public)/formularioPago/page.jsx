@@ -21,7 +21,7 @@ const TERMINOS_Y_CONDICIONES_TEXTO = `Santiago de chile 2025
 Términos y condiciones. 
 Generalidades 
 Este documento regula los términos y condiciones bajo los cuales Ud. tiene derecho a 
-acceder y usar los servicios del sitio Web www.siluetachic.cl y de cualquier información, 
+acceder y usar los servicios del sitio Web www.innovadent.cl y de cualquier información, 
 texto, video u otro material comunicado en el sitio web.  
 En este sitio Web podrá usar, sin costo, el software y las aplicaciones para equipos móviles 
 que le permitan navegar, visitar, comparar y si lo desea, adquirir los bienes o servicios que 

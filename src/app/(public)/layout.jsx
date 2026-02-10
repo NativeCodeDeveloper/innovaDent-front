@@ -18,7 +18,7 @@ export default function PublicLayout({ children }) {
                     <NavBarInnovaDent />
 
                     {/* Add padding-top to account for fixed navbar */}
-                    <main className="relative z-0 pt-[120px]">{children}</main>
+                    <main className="relative z-0 pt-26 md:pt-30">{children}</main>
 
                     <FloatingWhatsApp/>
                 </div>

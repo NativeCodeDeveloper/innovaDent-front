@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import {
     Award,
@@ -8,7 +9,11 @@ import {
     Shield,
     Heart,
     Sparkles,
-    ChevronRight
+    ChevronRight,
+    Hand,
+    Handshake,
+    BadgeCheck,
+    Microscope
 } from "lucide-react";
 
 /**
@@ -16,7 +21,7 @@ import {
  * Estilo Apple: minimalista, limpio, con tarjetas blancas
  */
 export default function Seccion2PorQueElegirnos() {
-
+    
     // Primera parte: Estadísticas con números destacados
     const estadisticas = [
         {
@@ -47,6 +52,7 @@ export default function Seccion2PorQueElegirnos() {
             bgColor: "bg-amber-50",
         },
     ];
+    
 
     // Segunda parte: Valores y beneficios
     const valores = [
@@ -54,40 +60,48 @@ export default function Seccion2PorQueElegirnos() {
             id: 1,
             titulo: "Tecnología de vanguardia",
             descripcion: "Equipamiento dental de última generación para tratamientos precisos y cómodos.",
-            icon: Sparkles,
+            icon: Microscope,
         },
         {
             id: 2,
             titulo: "Atención personalizada",
             descripcion: "Cada paciente es único. Planes de tratamiento diseñados específicamente para ti.",
-            icon: Heart,
+            icon: Handshake,
         },
         {
             id: 3,
             titulo: "Garantía extendida",
             descripcion: "Respaldamos nuestro trabajo con garantías en todos los procedimientos realizados.",
-            icon: Shield,
+            icon: BadgeCheck,
         },
     ];
 
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: {
+            opacity: 0,
+        },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.15,
+                staggerChildren: 0.12,
+                delayChildren: 0.1,
             },
         },
     };
 
     const cardVariants = {
-        hidden: { opacity: 0, y: 20 },
+        hidden: {
+            opacity: 0,
+            y: 30,
+            scale: 0.95,
+        },
         visible: {
             opacity: 1,
             y: 0,
+            scale: 1,
             transition: {
-                duration: 0.6,
-                ease: "easeOut",
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1], // Ease suave estilo Apple
             },
         },
     };
@@ -97,9 +111,9 @@ export default function Seccion2PorQueElegirnos() {
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
 
-                {/* Primera Parte: Nuestros Números */}
+                {/* ========== SECCIÓN ESTADÍSTICAS (COMENTADA TEMPORALMENTE) ========== */}
+                {/*
                 <div className="mb-20 md:mb-32">
-                    {/* Encabezado */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -119,7 +133,6 @@ export default function Seccion2PorQueElegirnos() {
                         </a>
                     </motion.div>
 
-                    {/* Grid de Estadísticas */}
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
@@ -140,7 +153,6 @@ export default function Seccion2PorQueElegirnos() {
                                         border border-gray-100
                                     "
                                 >
-                                    {/* Icono */}
                                     <div className={`
                                         w-12 h-12 rounded-xl ${stat.bgColor}
                                         flex items-center justify-center mb-6
@@ -149,7 +161,6 @@ export default function Seccion2PorQueElegirnos() {
                                         <IconComponent className={`w-6 h-6 ${stat.color}`} strokeWidth={2} />
                                     </div>
 
-                                    {/* Contenido */}
                                     <div className="mb-6">
                                         <p className="text-gray-900 text-lg mb-1">
                                             <span className={`text-4xl md:text-5xl font-bold ${stat.color}`}>
@@ -162,7 +173,6 @@ export default function Seccion2PorQueElegirnos() {
                                         </p>
                                     </div>
 
-                                    {/* Botón Info */}
                                     <button
                                         className="
                                             w-8 h-8 rounded-full bg-gray-900 text-white
@@ -178,6 +188,8 @@ export default function Seccion2PorQueElegirnos() {
                         })}
                     </motion.div>
                 </div>
+                */}
+                {/* ========== FIN SECCIÓN ESTADÍSTICAS ========== */}
 
                 {/* Segunda Parte: Nuestros Valores */}
                 <div>
@@ -199,7 +211,7 @@ export default function Seccion2PorQueElegirnos() {
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
+                        viewport={{ once: true, amount: 0.2 }}
                         className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
                     >
                         {valores.map((valor) => {

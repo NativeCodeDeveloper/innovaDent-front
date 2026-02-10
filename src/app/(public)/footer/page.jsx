@@ -124,14 +124,14 @@ export default function Footer() {
                             <li className="flex gap-3">
                                 <MapPin className="mt-0.5 h-5 w-5 flex-none text-teal-400" />
                                 <span>
-                  1 Norte 1337, Talca, Región del Maule, Chile
-                </span>
+                                    Calle 3 norte #1650, Talca Región del Maule, Chile
+                                </span>
                             </li>
 
                             <li className="flex items-center gap-3">
                                 <Phone className="h-5 w-5 flex-none text-teal-400" />
-                                <a href="tel:+56712345678" className="hover:text-white transition-colors">
-                                    +56 71 234 5678
+                                <a href="tel:+56712385564" className="hover:text-white transition-colors">
+                                    +56 71 2385564 
                                 </a>
                             </li>
 
@@ -141,14 +141,14 @@ export default function Footer() {
                                     href="mailto:contacto@innovadent.cl"
                                     className="hover:text-white transition-colors"
                                 >
-                                    contacto@innovadent.cl
+                                    innovadent.talca@gmail.com
                                 </a>
                             </li>
 
                             <li className="flex items-center gap-3">
                                 <WhatsAppIcon className="h-5 w-5 flex-none text-teal-400" />
                                 <a
-                                    href="https://wa.me/56912345678"
+                                    href="https://wa.me/56956480103"
                                     className="hover:text-white transition-colors"
                                     target="_blank"
                                     rel="noreferrer"
@@ -168,7 +168,7 @@ export default function Footer() {
                             className="absolute inset-0 h-full w-full"
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            src="https://www.google.com/maps?q=1+Norte+1337,+Talca,+Regi%C3%B3n+del+Maule,+Chile&output=embed"
+                            src="https://www.google.com/maps?q=1+Norte+1650,+Talca,+Regi%C3%B3n+del+Maule,+Chile&output=embed"
                         />
                     </div>
                 </div>

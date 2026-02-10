@@ -7,12 +7,13 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Sparkles, Smile, Shield, Users, Heart, Clock } from "lucide-react";
 import Seccion1Bienvenida from "@/app/(public)/seccion1/Seccion1Bienvenida";
 import Seccion2PorQueElegirnos from "@/app/(public)/seccion2/Seccion2PorQueElegirnos";
+import Seccion3 from "@/app/(public)/seccion3/Seccion3";
 
 // Definición de servicios dentales
 const SERVICIOS_DENTALES = [
     {
         id: 1,
-        titulo: "Limpieza Dental Profesional",
+        titulo: "Limpieza Dental",
         descripcion: "Prevención y salud bucal integral para toda la familia",
         color: "teal",
     },
@@ -43,7 +44,7 @@ const SERVICIOS_DENTALES = [
     {
         id: 6,
         titulo: "Conoce a Nuestros Profesionales",
-        descripcion: "Andrea & Cristian | Especialistas certificados a tu servicio",
+        descripcion: "Dra. Andrea Morán & Dr. Cristian Morales | Especialistas certificados a tu servicio",
         color: "teal",
         isProfesionales: true,
     },
@@ -102,6 +103,10 @@ export default function Portada() {
 
     function agenda() {
         router.push(`/AgendaProceso`);
+    }
+
+    function irATratamientos() {
+        router.push(`/tratamientos`);
     }
 
     const nextSlide = () => {
@@ -181,13 +186,21 @@ export default function Portada() {
                         {currentService?.descripcion}
                     </p>
 
-                    {/* CTA Principal */}
-                    <Button
-                        onClick={agenda}
-                        className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-6 md:px-10 md:py-7 text-lg md:text-xl font-semibold rounded-full shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-teal-500/50"
-                    >
-                        Agendar mi hora
-                    </Button>
+                    {/* Botones CTA */}
+                    <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center">
+                        <Button
+                            onClick={agenda}
+                            className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-6 md:px-10 md:py-7 text-lg md:text-xl font-semibold rounded-full shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-teal-500/50"
+                        >
+                            Agendar mi hora
+                        </Button>
+                        <Button
+                            onClick={irATratamientos}
+                            className="bg-white/20 hover:bg-white/30 text-white px-8 py-6 md:px-10 md:py-7 text-lg md:text-xl font-semibold rounded-full shadow-2xl transition-all duration-300 hover:scale-105 backdrop-blur-sm border-2 border-white/30"
+                        >
+                            Ver tratamientos
+                        </Button>
+                    </div>
 
                     {currentService?.isProfesionales && (
                         <p className="mt-6 text-sm md:text-base text-white/80 font-medium">
@@ -236,6 +249,7 @@ export default function Portada() {
             {/* SECCIONES ADICIONALES */}
             <Seccion1Bienvenida />
             <Seccion2PorQueElegirnos />
+            <Seccion3 />
         </div>
     );
 }

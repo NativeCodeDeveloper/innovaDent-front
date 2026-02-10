@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Phone, Mail, Clock, Menu, X, Facebook, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -15,15 +16,15 @@ function WhatsAppIcon({ className = "" }) {
 }
 
 const topBarLinks = [
-  { icon: Clock, text: "Lunes a Viernes 9:00 - 19:00", href: null },
-  { icon: Phone, text: "+56 9 1234 5678", href: "tel:+56912345678" },
-  { icon: Mail, text: "contacto@innovadent.cl", href: "mailto:contacto@innovadent.cl" },
+  { icon: Clock, text: "Lunes a Sábado 9:00 - 20:00", href: null },
+  { icon: Phone, text: "+56 71 2385564", href: "tel:+56712385564" },
+  { icon: Mail, text: "innovadent.talca@gmail.com ", href: "mailto:innovadent.talca@gmail.com" },
 ];
 
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/innovadent", label: "Instagram" },
   { icon: Facebook, href: "https://www.facebook.com/innovadent", label: "Facebook" },
-  { icon: WhatsAppIcon, href: "https://wa.me/56912345678", label: "WhatsApp" },
+  { icon: WhatsAppIcon, href: "https://wa.me/56956480103", label: "WhatsApp" },
 ];
 
 const navItems = [
@@ -93,10 +94,17 @@ export function NavBarInnovaDent() {
       {/* Main Navbar */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-teal-600">InnovaDent</span>
+            <Link href="/" className="flex items-center group">
+              <Image
+                src="/logoinnovadent.png"
+                alt="InnovaDent Logo"
+                width={235}
+                height={63}
+                className="w-32 h-auto md:w-45 transition-transform duration-300 group-hover:scale-105"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}

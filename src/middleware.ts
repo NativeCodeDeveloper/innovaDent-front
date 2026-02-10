@@ -1,6 +1,6 @@
 
 
-/*
+
 
 // frontend/src/middleware.ts
 import { NextResponse, type NextRequest } from 'next/server'
@@ -17,12 +17,12 @@ matcher: ['/dashboard/:path*'], // o simplemente [] si quieres que no aplique a 
 
 
 
- */
+ 
 
 
 
 
-
+/*
 
 // TypeScript
 // archivo: `frontend/src/middleware.ts`
@@ -34,7 +34,8 @@ import { NextResponse, type NextRequest } from 'next/server'
 const isProtectedRoute = createRouteMatcher(['/dashboard/:path*'])
 
 const ALLOWED_EMAILS = new Set([
-    'siluetachicestudio@gmail.com',
+    'desarrollo.native.code@gmail.com',
+    'contacto@innovadent.cl',
     'soporte@nativecode.com',
 ])
 
@@ -117,3 +118,4 @@ export const config = {
 
 
 
+*/

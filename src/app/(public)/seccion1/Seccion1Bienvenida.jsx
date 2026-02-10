@@ -82,7 +82,7 @@ export default function Seccion1Bienvenida() {
         {
             id: 5,
             icon: Sparkles,
-            titulo: "Diseño de Sonrisa",
+            titulo: "Estética oral",
             descripcion: "Transformación estética dental personalizada. Carillas, blanqueamiento y armonización facial para tu mejor versión en Talca.",
             color: "text-teal-600",
             bg: "bg-gradient-to-br from-teal-50 to-violet-50",
@@ -92,7 +92,7 @@ export default function Seccion1Bienvenida() {
         {
             id: 6,
             icon: Shield,
-            titulo: "Prótesis Dentales",
+            titulo: "Implantes Dentales",
             descripcion: "Soluciones protésicas de alta calidad y durabilidad. Coronas, puentes y dentaduras fabricadas con materiales premium en Talca.",
             color: "text-teal-600",
             bg: "bg-gradient-to-br from-teal-50 to-purple-50",
@@ -102,12 +102,12 @@ export default function Seccion1Bienvenida() {
         {
             id: 7,
             icon: Heart,
-            titulo: "Armonización Oro Facial",
-            descripcion: "Estética facial integral complementaria. Rellenos, toxina botulínica y tratamientos faciales para realzar tu belleza en Talca.",
+            titulo: "Exodoncia",
+            descripcion: "Procedimiento quirúrgico de la odontología que consiste en la extracción de un diente o muela de su alvéolo óseo.",
             color: "text-teal-600",
             bg: "bg-gradient-to-br from-teal-50 to-pink-50",
             imagePlaceholder: "bg-linear-to-br from-teal-100 to-pink-100",
-            imagen: "/armo.png"
+            imagen: "/exodon.png"
         },
     ];
 
@@ -158,7 +158,7 @@ export default function Seccion1Bienvenida() {
                     className="text-center mb-8 md:mb-16"
                 >
                     <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4 leading-tight px-4">
-                        Nuestros Servicios Profesionales
+                        Tratamientos dentales
                     </h2>
                     <div className="w-16 md:w-20 h-1 bg-teal-500 mx-auto mb-4 md:mb-6"></div>
                     <p className="text-sm md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed px-4">
@@ -344,7 +344,7 @@ export default function Seccion1Bienvenida() {
                         Agendar mi hora
                     </button>
                     <p className="mt-3 md:mt-4 text-xs md:text-sm text-teal-50">
-                        Primera consulta  - Atención en Talca
+                        Atención inicial valor $15.000 - ¡Contáctanos para más información!
                     </p>
                 </motion.div>
             </div>

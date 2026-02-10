@@ -142,7 +142,7 @@ export default function FormularioContacto() {
                                 </a>
 
                                 <a
-                                    href="https://www.instagram.com/siluetachicoficial/"
+                                    href="https://www.instagram.com/innovadent"
                                     target="_blank"
                                     aria-label="Instagram"
                                     className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500 via-rose-500 to-amber-400 text-white shadow-sm hover:opacity-90"
