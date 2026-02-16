@@ -1,7 +1,7 @@
 "use client"
 import {useEffect, useState} from "react";
 import ShadcnInput from "@/Componentes/shadcnInput2";
-import ShadcnButton2 from "@/Componentes/shadcnButton2";
+import {Button} from "@/components/ui/button";
 import {useAgenda} from "@/ContextosGlobales/AgendaContext";
 import ToasterClient from "@/Componentes/ToasterClient";
 import {toast} from "react-hot-toast";
@@ -200,19 +200,19 @@ export default function FormularioReserva() {
             <ToasterClient/>
             <div className="mx-auto max-w-3xl">
                 <header className="mb-6">
-                    <h1 className="text-2xl font-extrabold text-indigo-700">Formulario Agendamiento</h1>
+                    <h1 className="text-2xl font-extrabold text-teal-700">Formulario Agendamiento</h1>
                     <p className="mt-1 text-sm text-slate-500">Completa los datos para agendar tu hora.</p>
                 </header>
 
                 <form
-                    className="rounded-2xl bg-white border border-sky-100 p-6 shadow-sm"
+                    className="rounded-2xl bg-white border border-teal-100 p-6 shadow-sm"
                     onSubmit={(e) => {
                         e.preventDefault();
                     }}
                 >
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <div>
-                            <label className="block text-xs font-semibold text-sky-600 mb-2">Nombre</label>
+                            <label className="block text-xs font-semibold text-teal-600 mb-2">Nombre</label>
                             <ShadcnInput
                                 value={nombrePaciente}
                                 onChange={(e) => setNombrePaciente(e.target.value)}
@@ -222,7 +222,7 @@ export default function FormularioReserva() {
                         </div>
 
                         <div>
-                            <label className="block text-xs font-semibold text-sky-600 mb-2">Apellido</label>
+                            <label className="block text-xs font-semibold text-teal-600 mb-2">Apellido</label>
                             <ShadcnInput
                                 value={apellidoPaciente}
                                 onChange={(e) => setApellidoPaciente(e.target.value)}
@@ -232,7 +232,7 @@ export default function FormularioReserva() {
                         </div>
 
                         <div>
-                            <label className="block text-xs font-semibold text-sky-600 mb-2">Rut</label>
+                            <label className="block text-xs font-semibold text-teal-600 mb-2">Rut</label>
                             <ShadcnInput
                                 value={rut}
                                 onChange={(e) => {
@@ -245,7 +245,7 @@ export default function FormularioReserva() {
                         </div>
 
                         <div>
-                            <label className="block text-xs font-semibold text-sky-600 mb-2">Correo</label>
+                            <label className="block text-xs font-semibold text-teal-600 mb-2">Correo</label>
                             <ShadcnInput
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -255,7 +255,7 @@ export default function FormularioReserva() {
                         </div>
 
                         <div>
-                            <label className="block text-xs font-semibold text-sky-600 mb-2">Teléfono</label>
+                            <label className="block text-xs font-semibold text-teal-600 mb-2">Teléfono</label>
                             <ShadcnInput
                                 value={telefono}
                                 onChange={(e) => setTelefono(e.target.value)}
@@ -265,7 +265,7 @@ export default function FormularioReserva() {
                         </div>
 
                         <div>
-                            <label className="block text-xs font-semibold text-sky-600 mb-2">Rango fecha
+                            <label className="block text-xs font-semibold text-teal-600 mb-2">Rango fecha
                                 Seleccionado</label>
 
 
@@ -304,10 +304,9 @@ export default function FormularioReserva() {
 
 
                         <div className="flex gap-2">
-                            <ShadcnButton2
-                                nombre={"FINALIZAR"}
-                                funcion={(e) => {
-                                    // Evita que el form intente hacer submit (recarga/navegación) y corta el redirect
+                            <Button
+                                className="px-6 py-2 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-700 shadow-sm transition"
+                                onClick={(e) => {
                                     if (e?.preventDefault) e.preventDefault();
                                     if (e?.stopPropagation) e.stopPropagation();
 
@@ -324,10 +323,14 @@ export default function FormularioReserva() {
                                         totalPago
                                     );
                                 }}
-                            />
+                            >
+                                FINALIZAR
+                            </Button>
 
                             <Link href={"/AgendaProceso"}>
-                                <ShadcnButton2 nombre={"RETROCEDER"}/>
+                                <Button className="px-6 py-2 rounded-lg bg-white border border-teal-300 text-teal-700 font-semibold hover:bg-teal-50 shadow-sm transition">
+                                    RETROCEDER
+                                </Button>
                             </Link>
                         </div>
                     </div>
@@ -337,7 +340,7 @@ export default function FormularioReserva() {
                 <br/>
 
                 <div className="text-sm text-slate-500">
-                    <span className="font-medium text-sky-600">Importante:</span> Revisa que los datos sean
+                    <span className="font-medium text-teal-600">Importante:</span> Revisa que los datos sean
                     correctos antes de agendar.
                 </div>
 

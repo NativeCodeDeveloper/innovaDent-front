@@ -3,7 +3,7 @@ import {useMemo, useState, useEffect, useRef} from "react";
 import {Michroma} from "next/font/google";
 import {useAgenda} from "@/ContextosGlobales/AgendaContext";
 import Link from "next/link";
-import ShadcnButton2 from "@/Componentes/shadcnButton2";
+import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
 import * as React from "react";
 
@@ -359,35 +359,35 @@ export default function CalendarioMensualHoras() {
             <div className="mx-auto w-full max-w-3xl">
                 <header className="mb-6 flex flex-col items-center gap-2 text-center">
                     <div
-                        className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-xs font-medium text-slate-600">
+                        className="inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-xs font-medium text-slate-600">
                         Agenda · Online
                     </div>
 
                     <h1
                         className={`text-3xl sm:text-4xl font-black tracking-widest `}
                     >
-                        <span className="bg-gradient-to-r from-purple-700 via-indigo-500 to-cyan-600 text-transparent bg-clip-text ">Silueta Chic</span>
+                        <span className="bg-gradient-to-r from-teal-700 via-teal-500 to-teal-400 text-transparent bg-clip-text">InnovaDent</span>
                         <span
-                            className="relative mt-1 block h-1 w-40 max-w-full rounded-full bg-gradient-to-r from-sky-300 via-sky-200 to-transparent"
+                            className="relative mt-1 block h-1 w-40 max-w-full rounded-full bg-gradient-to-r from-teal-400 via-teal-300 to-transparent"
                         />
                     </h1>
 
                     <p className="max-w-md text-sm leading-6 text-slate-500">
-                        Reserva tu hora para depilacion en segundos. Selecciona fecha y un bloque horario disponible.
+                        Reserva tu hora dental en segundos. Selecciona fecha y un bloque horario disponible.
                     </p>
                 </header>
 
-                <div className="rounded-2xl border border-sky-200/60 bg-white/80 p-4 shadow-lg shadow-slate-900/5 backdrop-blur supports-[backdrop-filter]:bg-white/70 text-slate-800">
+                <div className="rounded-2xl border border-teal-200/60 bg-white/80 p-4 shadow-lg shadow-slate-900/5 backdrop-blur supports-[backdrop-filter]:bg-white/70 text-slate-800">
                     <div className="flex items-center justify-between">
                         <h2 className="text-sm font-semibold text-slate-800">Agenda mensual</h2>
                         <span className="text-[12px] text-slate-500">Selecciona un día</span>
                     </div>
-                    <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-sky-200 to-transparent"/>
+                    <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-teal-200 to-transparent"/>
 
                     {/* Navegación mes */}
                     <div className="mt-3 flex items-center justify-between">
                         <button
-                            className="rounded-lg border border-sky-200/70 bg-white/80 px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-md shadow-slate-900/5 hover:bg-white active:scale-[0.98] hover:shadow-lg hover:shadow-slate-900/10"
+                            className="rounded-lg border border-teal-200/70 bg-white/80 px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-md shadow-slate-900/5 hover:bg-white active:scale-[0.98] hover:shadow-lg hover:shadow-slate-900/10"
                             onClick={() => {
                                 setMesActual(new Date(mesActual.setMonth(mesActual.getMonth() - 1)));
                                 setFechaSeleccionada(null);
@@ -403,7 +403,7 @@ export default function CalendarioMensualHoras() {
                             {mesActual.toLocaleString("es-CL", {month: "long", year: "numeric"})}
                         </strong>
                         <button
-                            className="rounded-lg border border-sky-200/70 bg-white/80 px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-md shadow-slate-900/5 hover:bg-white active:scale-[0.98] hover:shadow-lg hover:shadow-slate-900/10"
+                            className="rounded-lg border border-teal-200/70 bg-white/80 px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-md shadow-slate-900/5 hover:bg-white active:scale-[0.98] hover:shadow-lg hover:shadow-slate-900/10"
                             onClick={() => {
                                 setMesActual(new Date(mesActual.setMonth(mesActual.getMonth() + 1)));
                                 setFechaSeleccionada(null);
@@ -445,12 +445,12 @@ export default function CalendarioMensualHoras() {
                                             seleccionarFecha(dia);
                                         }}
                                         className={
-                                            "h-10 flex items-center justify-center rounded-md text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-sky-200 focus:ring-offset-1 " +
+                                            "h-10 flex items-center justify-center rounded-md text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-1 " +
                                             (isDisabled
                                                 ? "cursor-not-allowed border border-slate-200/70 bg-white/60 text-slate-400 shadow-sm" + (isSunday ? " opacity-50" : "")
                                                 : isSelected
-                                                    ? "border border-sky-300 bg-gradient-to-b from-sky-100 to-white text-slate-900 shadow-md shadow-sky-900/10"
-                                                    : "border border-sky-200/80 bg-white/90 text-slate-700 shadow-sm hover:bg-white hover:border-sky-300 hover:shadow-md hover:shadow-slate-900/5")
+                                                    ? "border border-teal-300 bg-gradient-to-b from-teal-100 to-white text-slate-900 shadow-md shadow-teal-900/10"
+                                                    : "border border-teal-200/80 bg-white/90 text-slate-700 shadow-sm hover:bg-white hover:border-teal-300 hover:shadow-md hover:shadow-slate-900/5")
                                         }
                                     >
                                         {dia.getDate()}
@@ -473,7 +473,7 @@ export default function CalendarioMensualHoras() {
                                     <p className="text-xs text-slate-500">Bloques de 60 min</p>
                                     {checkingBlocked && (
                                         <div className="flex items-center gap-2 text-xs text-slate-500">
-                                            <svg className="w-3 h-3 animate-spin text-sky-500"
+                                            <svg className="w-3 h-3 animate-spin text-teal-500"
                                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <circle className="opacity-25" cx="12" cy="12" r="10"
                                                         stroke="currentColor" strokeWidth="4"></circle>
@@ -516,7 +516,7 @@ export default function CalendarioMensualHoras() {
 
                                     return (
                                         <div key={entry.start}
-                                             className={"flex items-center justify-between rounded-xl border p-3 bg-white/90 border-sky-200/50 shadow-sm hover:shadow-md hover:shadow-slate-900/5 transition"}>
+                                             className={"flex items-center justify-between rounded-xl border p-3 bg-white/90 border-teal-200/50 shadow-sm hover:shadow-md hover:shadow-slate-900/5 transition"}>
                                             <div>
                                                 <div className="text-sm font-medium text-slate-800">Atención</div>
                                                 <div className="text-xs text-slate-500">{entry.start} – {entry.end}</div>
@@ -524,7 +524,7 @@ export default function CalendarioMensualHoras() {
                                             <div className="flex items-center gap-3">
                                                 <button
                                                     onClick={() => seleccionarInicio(entry.start)}
-                                                    className={"px-3 py-1 rounded-lg font-semibold shadow-sm transition active:scale-[0.98] " + (selected ? 'bg-gradient-to-r from-sky-600 to-cyan-600 text-white shadow-md shadow-sky-900/15' : 'bg-white/90 border border-sky-200/80 text-sky-700 hover:bg-white hover:shadow-md hover:shadow-slate-900/5')}
+                                                    className={"px-3 py-1 rounded-lg font-semibold shadow-sm transition active:scale-[0.98] " + (selected ? 'bg-gradient-to-r from-teal-600 to-teal-500 text-white shadow-md shadow-teal-900/15' : 'bg-white/90 border border-teal-200/80 text-teal-700 hover:bg-white hover:shadow-md hover:shadow-slate-900/5')}
                                                 >
                                                     {selected ? 'Seleccionada' : 'Seleccionar'}
                                                 </button>
@@ -570,17 +570,21 @@ export default function CalendarioMensualHoras() {
 
                 <div className="flex gap-5 justify-center">
                     <Link href={"/"}>
-                        <ShadcnButton2 nombre={"RETROCEDER"}/>
+                        <Button className="px-6 py-2 rounded-lg bg-white border border-teal-300 text-teal-700 font-semibold hover:bg-teal-50 shadow-sm transition">
+                            RETROCEDER
+                        </Button>
                     </Link>
 
                     <Link href={"/formularioReserva"}>
-                        <ShadcnButton2 nombre={"SIGUIENTE"}/>
+                        <Button className="px-6 py-2 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-700 shadow-sm transition">
+                            SIGUIENTE
+                        </Button>
                     </Link>
                 </div>
 
                 <footer className="mt-10 text-center text-xs text-slate-600">
                     <p>
-                        Depilación Trilaser Indolora, Tu piel suave y libre todo el año.
+                        InnovaDent - Tu sonrisa, nuestra prioridad.
                     </p>
                     <p className="mt-2 text-[11px] text-slate-400">
                         Horarios: Lun-Vie 9:00-20:00 | Sáb 9:00-16:00 | Dom Cerrado

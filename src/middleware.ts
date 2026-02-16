@@ -17,10 +17,6 @@ matcher: ['/dashboard/:path*'], // o simplemente [] si quieres que no aplique a 
 
 
 
- 
-
-
-
 
 /*
 

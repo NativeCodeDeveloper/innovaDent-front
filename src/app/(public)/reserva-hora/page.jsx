@@ -44,15 +44,15 @@ export default function ReservaHora({ fechaReserva = '', horaReserva = '' }) {
               </span>
 
               <h1 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
-                ¡Felicidades!
+                ¡Cita generada con éxito!
               </h1>
 
               <p className="mt-2 text-slate-700">
-                Su hora en{" "}
+                Tu cita en{" "}
                 <span className="font-semibold text-indigo-600">
-                  Silueta Chic
+                  InnovaDent
                 </span>{" "}
-                ha sido reservada con éxito.
+                ha sido agendada correctamente. Te esperamos.
               </p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export default function ReservaHora({ fechaReserva = '', horaReserva = '' }) {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-slate-900">Servicio</p>
-                    <p className="text-sm text-slate-600">Agendar primera sesión, Pagaré el día de mi cita</p>
+                    <p className="text-sm text-slate-600">Consulta dental agendada</p>
                   </div>
                 </div>
 
@@ -116,29 +116,24 @@ export default function ReservaHora({ fechaReserva = '', horaReserva = '' }) {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-slate-900">Ubicación</p>
-                    <p className="text-sm text-slate-600">SILUETA CHIC, Avenida Irarrázaval 1989 OF 204 SUR, Ñuñoa, Santiago, Chile</p>
+                    <p className="text-sm text-slate-600">InnovaDent, Santiago, Chile</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <p className="mt-6 text-center text-sm font-semibold text-slate-900">
-              Enviamos la información de tu reserva a
-              <span className="block mt-1 text-indigo-600">cvvvargas@gmail.com</span>
-            </p>
-
             <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
               <p className="text-sm font-semibold text-slate-900">
-                ¡Tu cita con Silueta Chic ha sido confirmada! <span aria-hidden>🎉</span>
+                Tu cita en InnovaDent ha sido confirmada
               </p>
               <p className="mt-3 text-sm text-slate-700 leading-relaxed">
-                Para asegurar una sesión exitosa, revisa estos puntos clave:
+                Te recordamos algunos puntos importantes:
+                <br /><br />
+                1. <strong>Puntualidad:</strong> Te pedimos llegar al menos 10 minutos antes de tu hora agendada.
                 <br />
-                1. Preparación Obligatoria: La zona debe asistir rasurada con rasuradora de varón (máx. 24h antes) y limpia e higienizada (sin cremas, maquillaje, desodorantes, etc.). Si no cumple la preparación, la sesión se pierde y se descuenta del paquete.
+                2. <strong>Cancelación:</strong> Si necesitas reprogramar o cancelar, avísanos con al menos 24 horas de anticipación.
                 <br />
-                2. Políticas de Asistencia: Puntualidad: Tolerancia de 10 minutos de atraso. Si se excede, la sesión se pierde. Cancelación: Avise con al menos 24 horas de anticipación. El aviso tardío o No-Show resultará pérdida de la sesión.
-                <br />
-                3. Recordatorio de Cuidados PRE Y POST: Antes: Suspender sol/bronceado (30 días antes) y métodos de arranque (cera/pinzas). Suspender ácidos tópicos (1 semana antes). Suspender medicación fotosensibilizante/anticoagulante bajo supervisión médica. Si hay vacuna, esperar 15 días. Después: Evitar sol/bronceado (48 horas). Usar protector solar FPS 50. Evitar calor/sudor (24 horas). No depilar con métodos de arranque.
+                3. <strong>Documentos:</strong> Recuerda traer tu cédula de identidad y cualquier examen o radiografía dental reciente que tengas disponible.
               </p>
             </div>
 

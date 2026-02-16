@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Phone, Mail, Clock, Menu, X, Facebook, Instagram } from "lucide-react"
+import { Phone, Mail, Clock, Menu, X, Facebook, Instagram, CalendarCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // WhatsApp Icon
@@ -18,7 +18,7 @@ function WhatsAppIcon({ className = "" }) {
 const topBarLinks = [
   { icon: Clock, text: "Lunes a Sábado 9:00 - 20:00", href: null },
   { icon: Phone, text: "+56 71 2385564", href: "tel:+56712385564" },
-  { icon: Mail, text: "innovadent.talca@gmail.com ", href: "mailto:innovadent.talca@gmail.com" },
+  { icon: Mail, text: "innovadent.talca@gmail.com", href: "mailto:innovadent.talca@gmail.com" },
 ];
 
 const socialLinks = [
@@ -35,42 +35,49 @@ const navItems = [
 
 export function NavBarInnovaDent() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="w-full fixed top-0 z-50 bg-white shadow-sm">
-      {/* Top Bar */}
-      <div className="bg-teal-600 text-white">
+    <header className="w-full fixed top-0 z-50">
+      {/* ── Top Bar ── */}
+      <div className="bg-gradient-to-r from-teal-700 via-teal-600 to-teal-700 text-white/90">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-10 text-sm">
+          <div className="flex items-center justify-between h-9 text-xs tracking-wide">
             {/* Contact Info */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden md:flex items-center divide-x divide-white/20">
               {topBarLinks.map((item, idx) => {
                 const Icon = item.icon;
                 const content = (
-                  <>
-                    <Icon className="w-4 h-4" />
+                  <span className="flex items-center gap-1.5 px-3 first:pl-0">
+                    <Icon className="w-3.5 h-3.5 opacity-80" />
                     <span>{item.text}</span>
-                  </>
+                  </span>
                 );
-                
+
                 return item.href ? (
                   <a
                     key={idx}
                     href={item.href}
-                    className="flex items-center gap-2 hover:text-teal-100 transition-colors"
+                    className="hover:text-white transition-colors duration-200"
                   >
                     {content}
                   </a>
                 ) : (
-                  <div key={idx} className="flex items-center gap-2">
+                  <div key={idx} className="text-white/80">
                     {content}
                   </div>
                 );
               })}
             </div>
-            
+
             {/* Social Links */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
               {socialLinks.map((social, idx) => {
                 const Icon = social.icon;
                 return (
@@ -80,9 +87,9 @@ export function NavBarInnovaDent() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="hover:text-teal-100 transition-colors"
+                    className="p-1.5 rounded-full hover:bg-white/15 text-white/80 hover:text-white transition-all duration-200"
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-3.5 h-3.5" />
                   </a>
                 );
               })}
@@ -91,29 +98,36 @@ export function NavBarInnovaDent() {
         </div>
       </div>
 
-      {/* Main Navbar */}
-      <div className="bg-white border-b border-gray-200">
+      {/* ── Main Navbar ── */}
+      <div
+        className={
+          "bg-white/95 backdrop-blur-md border-b transition-all duration-300 " +
+          (scrolled
+            ? "border-gray-200/80 shadow-lg shadow-black/5"
+            : "border-gray-100 shadow-sm")
+        }
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center group">
+            <Link href="/" className="flex items-center group shrink-0">
               <Image
                 src="/logoinnovadent.png"
                 alt="InnovaDent Logo"
                 width={235}
                 height={63}
-                className="w-32 h-auto md:w-45 transition-transform duration-300 group-hover:scale-105"
+                className="w-32 h-auto md:w-45 transition-transform duration-300 group-hover:scale-[1.03]"
                 priority
               />
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-sm font-medium text-gray-700 hover:text-teal-600 transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-teal-600 hover:after:w-full after:transition-all after:duration-300"
+                  className="relative px-4 py-2 text-sm font-medium text-slate-600 rounded-lg hover:text-teal-700 hover:bg-teal-50/60 transition-all duration-200 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:w-0 after:rounded-full after:bg-teal-500 hover:after:w-2/3 after:transition-all after:duration-300"
                 >
                   {item.label}
                 </Link>
@@ -121,52 +135,61 @@ export function NavBarInnovaDent() {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <Button
                 asChild
-                className="hidden sm:flex bg-teal-600 hover:bg-teal-700 text-white"
+                className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-700 hover:to-teal-600 text-white font-semibold px-5 py-2.5 rounded-full shadow-md shadow-teal-600/20 hover:shadow-lg hover:shadow-teal-600/30 transition-all duration-300 hover:scale-[1.02]"
               >
-                <Link href="/AgendaProceso">Agendar Hora</Link>
+                <Link href="/AgendaProceso">
+                  <CalendarCheck className="w-4 h-4" />
+                  Agendar Hora
+                </Link>
               </Button>
 
               {/* Mobile Menu Button */}
               <button
                 type="button"
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-teal-600 hover:bg-gray-100 transition-colors"
+                className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-600 hover:text-teal-600 hover:bg-teal-50 transition-colors duration-200"
                 aria-label="Toggle menu"
               >
-                {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="lg:hidden border-t border-gray-200 bg-white">
-            <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="block text-base font-medium text-gray-700 hover:text-teal-600 transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
+        {/* ── Mobile Menu ── */}
+        <div
+          className={
+            "lg:hidden overflow-hidden transition-all duration-300 ease-in-out " +
+            (mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0")
+          }
+        >
+          <div className="border-t border-gray-100 bg-white/98 px-4 pb-5 pt-3 space-y-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-700 hover:bg-teal-50/70 transition-colors duration-200"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className="pt-2">
               <Button
                 asChild
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-700 hover:to-teal-600 text-white font-semibold rounded-full shadow-md shadow-teal-600/20"
               >
                 <Link href="/AgendaProceso" onClick={() => setMobileOpen(false)}>
+                  <CalendarCheck className="w-4 h-4" />
                   Agendar Hora
                 </Link>
               </Button>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
