@@ -1,5 +1,6 @@
 // app/dashboard/layout.jsx
 import Link from "next/link";
+import MobileNav from "./MobileNav";
 
 export const metadata = {
     title: "Dashboard",
@@ -253,30 +254,7 @@ export default function DashboardLayout({ children }) {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0 h-full overflow-y-auto">
-                    {/* Mobile top bar */}
-                    <div className="md:hidden sticky top-0 z-40 border-b border-slate-200/80 bg-white/80 backdrop-blur-xl">
-                        <div className="px-4 py-3 flex items-center justify-between">
-                            <div className="flex items-center gap-2.5">
-                                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-cyan-400 to-blue-500">
-                                    <span className="text-[10px] font-bold text-white leading-none">SC</span>
-                                </div>
-                                <span className="text-sm font-semibold text-slate-900">Silueta Chic</span>
-                            </div>
-                            <div className="text-[11px] font-medium text-slate-400">Dashboard</div>
-                        </div>
-                        <div className="px-4 pb-3 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                            <div className="flex gap-1.5 w-max">
-                                <Link href="/dashboard" className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all whitespace-nowrap">Inicio</Link>
-                                <Link href="/dashboard/pedidosCompras" className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all whitespace-nowrap">Pedidos</Link>
-                                <Link href="/dashboard/ingresoProductos" className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all whitespace-nowrap">Productos</Link>
-                                <Link href="/dashboard/cupones" className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all whitespace-nowrap">Cupones</Link>
-                                <Link href="/dashboard/calendario" className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all whitespace-nowrap">Agenda</Link>
-                                <Link href="/dashboard/agendaCitas" className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all whitespace-nowrap">Citas</Link>
-                                <Link href="/dashboard/categoriasProductos" className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all whitespace-nowrap">Categorías</Link>
-                                <Link href="/dashboard/publicaciones" className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all whitespace-nowrap">Publicaciones</Link>
-                            </div>
-                        </div>
-                    </div>
+                    <MobileNav />
 
                     <main className="min-w-0">
                         {children}
