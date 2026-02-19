@@ -121,7 +121,7 @@ export default function Seccion3() {
                 </motion.div>
 
                 {/* Tarjetas (arriba) */}
-                <div className="flex items-center justify-start md:justify-center gap-2 md:gap-3 overflow-x-auto pb-2 mb-6 md:mb-8 w-full max-w-5xl mx-auto">
+                <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-6 md:mb-8 w-full max-w-5xl mx-auto">
                     {servicios.map((servicio, index) => {
                         const IconComponent = servicio.icon;
                         const isActive = index === activeIndex;
@@ -131,7 +131,7 @@ export default function Seccion3() {
                                 type="button"
                                 key={servicio.id}
                                 className={
-                                    `flex-shrink-0 cursor-pointer px-3 py-2 md:px-4 md:py-2.5 rounded-full border transition-all duration-300 ` +
+                                    `cursor-pointer px-3 py-2 md:px-4 md:py-2.5 rounded-full border transition-all duration-300 ` +
                                     (isActive
                                         ? "bg-white border-teal-500 shadow-sm shadow-teal-500/30"
                                         : "bg-gray-800/40 border-gray-700 hover:border-teal-500/50 hover:bg-gray-800/60")
@@ -145,7 +145,7 @@ export default function Seccion3() {
                                     <div className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-gray-700 bg-gray-800 flex items-center justify-center">
                                         <IconComponent className={`w-4 h-4 md:w-5 md:h-5 ${isActive ? "text-teal-300" : "text-gray-400"}`} />
                                     </div>
-                                    <span className={`text-xs md:text-sm font-semibold whitespace-nowrap ${isActive ? "text-teal-200" : "text-gray-300"}`}>
+                                    <span className={`text-xs md:text-sm font-semibold whitespace-nowrap ${isActive ? "text-teal-700" : "text-gray-300"}`}>
                                         {servicio.titulo}
                                     </span>
                                 </div>
@@ -251,9 +251,7 @@ export default function Seccion3() {
                             Agendar mi hora
                         </motion.button>
                     </div>
-                    <p className="mt-4 md:mt-6 text-xs md:text-sm text-teal-50/80">
-                        Evaluación inicial $15.000
-                    </p>
+                    
                 </motion.div>
             </div>
         </section>

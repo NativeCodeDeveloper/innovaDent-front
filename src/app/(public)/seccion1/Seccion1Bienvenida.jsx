@@ -23,6 +23,40 @@ export default function Seccion1Bienvenida() {
     const router = useRouter();
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlay, setIsAutoPlay] = useState(true);
+    const [tarjetasVolteadas, setTarjetasVolteadas] = useState({});
+
+    const profesionales = [
+        {
+            id: 1,
+            nombre: "Dra. Andrea Morán Rojas.",
+            especialidad: "Especialista en Rehabilitación oral y armonización facial. ",
+            descripcion: "Lidera planes de tratamiento personalizados con foco en salud, estética y seguimiento cercano para cada paciente.",
+            imagen: "/mujer1.png",
+            cta: "Conoce a la Dra. Andrea",
+            estudios: "Universidad de Talca",
+            enfoque: "Odontología estética y rehabilitación funcional",
+            especialidades: [
+                "Diseño de sonrisa y estética dental",
+                "Rehabilitación oral integral",
+                "Atención preventiva personalizada",
+            ],
+        },
+        {
+            id: 2,
+            nombre: "Dr. Cristian Morales Corena.",
+            especialidad: "Especialista en Rehabilitación oral",
+            descripcion: "Especialista en rehabilitación funcional y procedimientos clínicos avanzados, con enfoque preciso y mínimamente invasivo.",
+            imagen: "/hombre3.png",
+            cta: "Conoce al Dr. Cristian",
+            estudios: "Universidad de Concepción",
+            enfoque: "Cirugía oral y manejo clínico avanzado",
+            especialidades: [
+                "Cirugía dental mínimamente invasiva",
+                "Implantología y rehabilitación oral",
+                "Planificación de tratamientos complejos",
+            ],
+        },
+    ];
 
     /**
      * Array de servicios odontológicos
@@ -115,6 +149,13 @@ export default function Seccion1Bienvenida() {
         router.push('/AgendaProceso');
     };
 
+    const toggleTarjetaProfesional = (id) => {
+        setTarjetasVolteadas((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }));
+    };
+
     // Auto-play del carrusel
     useEffect(() => {
         if (!isAutoPlay) return;
@@ -149,15 +190,202 @@ export default function Seccion1Bienvenida() {
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
 
+                {/* Presentación del Equipo */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7 }}
+                    className="mb-10 md:mb-16"
+                >
+                    <div className="text-center mb-6 md:mb-8">
+                        <p className="text-xs tracking-[0.2em] uppercase text-teal-200 mb-2">
+                            Profesionales de Innovadent
+                        </p>
+                        <h3 className="mt-6 mb-20 text-2xl md:text-3xl font-semibold text-white leading-tight">
+                            Conoce a nuestro equipo
+                        </h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 md:gap-10 items-center justify-center">
+                        <div className="flex justify-center lg:justify-right lg:pr-8">
+                            <img
+                                src="/sonrisainnova.png"
+                                alt="Logo Innovadent"
+                                className="w-115 object-contain px-4 md:px-0"
+                            />
+                        </div>
+
+                        <div className="w-full lg:justify-self-end lg:max-w-[680px]">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+                                {profesionales.map((profesional) => {
+                                    const estaVolteada = Boolean(tarjetasVolteadas[profesional.id]);
+
+                                    return (
+                                        <div
+                                            key={profesional.id}
+                                            className="w-full"
+                                            style={{
+                                                perspective: "1800px",
+                                                height: "clamp(26rem, 46vw, 31rem)",
+                                            }}
+                                        >
+                                            <motion.div
+                                                className="relative h-full w-full"
+                                                animate={{ rotateY: estaVolteada ? 180 : 0 }}
+                                                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                                                style={{
+                                                    transformStyle: "preserve-3d",
+                                                    WebkitTransformStyle: "preserve-3d",
+                                                }}
+                                            >
+                                                <article
+                                                    className="
+                                                        absolute inset-0 rounded-[28px] overflow-hidden
+                                                        bg-white
+                                                        border
+                                                        ring-1 ring-black/5
+                                                        shadow-[0_24px_55px_-38px_rgba(15,23,42,0.45)]
+                                                        backdrop-blur
+                                                    "
+                                                    style={{
+                                                        backfaceVisibility: "hidden",
+                                                        WebkitBackfaceVisibility: "hidden",
+                                                        transform: "rotateY(0deg)",
+                                                        background: "linear-gradient(160deg, #ffffff 0%, #f7fbff 55%, #f1faff 100%)",
+                                                        borderColor: "#d6e2ee",
+                                                    }}
+                                                >
+                                                    <div className="p-5 md:p-6 h-full flex flex-col">
+                                                        <div className="relative mx-auto mt-1">
+                                                            <div className="pointer-events-none absolute -inset-7 rounded-full bg-sky-200/35 blur-2xl" />
+                                                            <div className="relative h-40 w-40 md:h-44 md:w-44 rounded-full bg-gradient-to-br from-[#f8fbff] via-white to-[#edf5fb] ring-1 ring-[#d3e2ef] overflow-hidden flex items-center justify-center">
+                                                                <img
+                                                                    src={profesional.imagen}
+                                                                    alt={profesional.nombre}
+                                                                    className="h-[88%] w-[88%] object-contain"
+                                                                />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="mt-5 text-center">
+                                                            <h4 className="text-base md:text-lg font-semibold text-[#1d1d1f]">
+                                                                {profesional.nombre}
+                                                            </h4>
+                                                            <p className="text-xs md:text-sm text-[#0a6dc2] font-medium mt-1">
+                                                                {profesional.especialidad}
+                                                            </p>
+                                                            <p className="text-sm text-[#4b5563] mt-3 leading-relaxed">
+                                                                {profesional.descripcion}
+                                                            </p>
+                                                        </div>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => toggleTarjetaProfesional(profesional.id)}
+                                                            className="
+                                                                mt-auto mt-6 w-full rounded-full
+                                                                bg-gradient-to-r from-teal-600 to-teal-500 text-white text-center
+                                                                text-sm md:text-[15px] font-bold tracking-[0.01em]
+                                                                px-4 py-2.5
+                                                                border border-teal-200/50 ring-1 ring-black/10
+                                                                shadow-[0_12px_24px_-14px_rgba(13,148,136,0.9),inset_0_1px_0_rgba(255,255,255,0.25)]
+                                                                transform-gpu will-change-transform
+                                                                transition-all duration-500 ease-out
+                                                                hover:-translate-y-0.5 hover:from-teal-700 hover:to-teal-600 hover:shadow-[0_16px_30px_-16px_rgba(13,148,136,0.95)]
+                                                                active:translate-y-0 active:scale-[0.99]
+                                                            "
+                                                        >
+                                                            {profesional.cta}
+                                                        </button>
+                                                    </div>
+                                                </article>
+
+                                                <article
+                                                    className="
+                                                        absolute inset-0 rounded-[28px] overflow-hidden
+                                                        bg-[#0b2440]
+                                                        border
+                                                        shadow-[0_22px_52px_-32px_rgba(2,6,23,0.78)]
+                                                        text-white p-5 md:p-6
+                                                        flex flex-col
+                                                    "
+                                                    style={{
+                                                        backfaceVisibility: "hidden",
+                                                        WebkitBackfaceVisibility: "hidden",
+                                                        transform: "rotateY(180deg)",
+                                                        background: "linear-gradient(160deg, #111827 0%, #0f2740 64%, #124052 100%)",
+                                                        borderColor: "rgba(186,230,253,0.25)",
+                                                    }}
+                                                >
+                                                    <p className="text-[11px] tracking-[0.2em] uppercase text-sky-100/85">
+                                                        Perfil profesional
+                                                    </p>
+                                                    <h4 className="text-lg md:text-xl font-semibold mt-2">
+                                                        {profesional.nombre}
+                                                    </h4>
+                                                    <p className="text-sm text-slate-200 mt-1">
+                                                        {profesional.especialidad}
+                                                    </p>
+
+                                                    <div className="mt-5 space-y-3 text-sm text-slate-100">
+                                                        <div>
+                                                            <p className="text-sky-200 font-medium">Formación</p>
+                                                            <p>{profesional.estudios}</p>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-sky-200 font-medium">Enfoque</p>
+                                                            <p>{profesional.enfoque}</p>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-sky-200 font-medium mb-1">Especialidades</p>
+                                                            <ul className="space-y-1.5 list-disc pl-4">
+                                                                {profesional.especialidades.map((item) => (
+                                                                    <li key={item}>
+                                                                        {item}
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => toggleTarjetaProfesional(profesional.id)}
+                                                        className="
+                                                            mt-auto mt-8 w-full rounded-full
+                                                            bg-gradient-to-r from-teal-600 to-teal-500 text-white
+                                                            text-sm md:text-[15px] font-bold tracking-[0.01em]
+                                                            px-4 py-2.5
+                                                            border border-teal-200/45 ring-1 ring-black/10
+                                                            shadow-[0_12px_24px_-14px_rgba(13,148,136,0.9),inset_0_1px_0_rgba(255,255,255,0.2)]
+                                                            transform-gpu will-change-transform
+                                                            transition-all duration-500 ease-out
+                                                            hover:-translate-y-0.5 hover:from-teal-700 hover:to-teal-600 hover:shadow-[0_16px_30px_-16px_rgba(13,148,136,0.95)]
+                                                            active:translate-y-0 active:scale-[0.99]
+                                                        "
+                                                    >
+                                                        Volver 
+                                                    </button>
+                                                </article>
+                                            </motion.div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: -30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7 }}
-                    className="text-center mb-8 md:mb-16"
+                    className="mt-12 text-center mb-8 md:mb-16"
                 >
-                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4 leading-tight px-4">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4 leading-tight px-6 md:px-0">
                         Tratamientos dentales
                     </h2>
                     <div className="w-16 md:w-20 h-1 bg-teal-500 mx-auto mb-4 md:mb-6"></div>
@@ -174,7 +402,14 @@ export default function Seccion1Bienvenida() {
                         <div className="relative w-full flex items-center justify-center">
                             {servicios.map((servicio, index) => {
                                 const IconComponent = servicio.icon;
-                                const distance = index - activeIndex;
+                                const totalSlides = servicios.length;
+                                const rawDistance = index - activeIndex;
+                                let distance = rawDistance;
+
+                                // Distancia circular para evitar "huecos" al pasar del último al primero
+                                if (distance > totalSlides / 2) distance -= totalSlides;
+                                if (distance < -totalSlides / 2) distance += totalSlides;
+
                                 const absDistance = Math.abs(distance);
 
                                 // Calcular posición y escala (ajustado para móvil)
@@ -344,7 +579,7 @@ export default function Seccion1Bienvenida() {
                         Agendar mi hora
                     </button>
                     <p className="mt-3 md:mt-4 text-xs md:text-sm text-teal-50">
-                        Atención inicial valor $15.000 - ¡Contáctanos para más información!
+                    ¡Contáctanos para más información!
                     </p>
                 </motion.div>
             </div>
