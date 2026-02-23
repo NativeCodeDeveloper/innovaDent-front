@@ -30,9 +30,8 @@ import { NextResponse, type NextRequest } from 'next/server'
 const isProtectedRoute = createRouteMatcher(['/dashboard/:path*'])
 
 const ALLOWED_EMAILS = new Set([
-    'desarrollo.native.code@gmail.com',
     'contacto@innovadent.cl',
-    'soporte@nativecode.com',
+    'soporte@nativecode.cl',
 ])
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {

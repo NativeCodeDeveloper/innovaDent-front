@@ -46,40 +46,34 @@ export default function CalendarioMensualHoras() {
         return dias;
     };
 
-    // Genera los bloques de atención (60 min) según el día de la semana
-    // Lunes a Viernes: 09:00 - 20:00
-    // Sábado: 09:00 - 16:00
-    // Domingo: No disponible
-    // Los inicios van separados por 70 minutos (60 atención + 10 descanso), pero los descansos no se muestran.
+    // Horarios fijos por dia de la semana
+    // Martes (2): 09:30, 10:30, 11:30, 12:30
+    // Viernes (5): 15:30, 16:30, 17:30, 18:30
+    const HORARIOS_MARTES = [
+        {start: "09:30", end: "10:30"},
+        {start: "10:30", end: "11:30"},
+        {start: "11:30", end: "12:30"},
+        {start: "12:30", end: "13:30"},
+    ];
+    const HORARIOS_VIERNES = [
+        {start: "15:30", end: "16:30"},
+        {start: "16:30", end: "17:30"},
+        {start: "17:30", end: "18:30"},
+        {start: "18:30", end: "19:30"},
+    ];
+
+    const esDiaDisponible = (fecha) => {
+        if (!fecha) return false;
+        const day = fecha.getDay();
+        return day === 2 || day === 5; // martes o viernes
+    };
+
     const attentionSlots = useMemo(() => {
         if (!fechaSeleccionada) return [];
-
-        const dayOfWeek = fechaSeleccionada.getDay(); // 0=domingo, 6=sábado
-
-        // Domingo no tiene horarios
-        if (dayOfWeek === 0) return [];
-
-        const slots = [];
-        const startMinutes = 9 * 60; // 09:00
-        // Sábado hasta 16:00, resto hasta 20:00
-        const endMinutes = dayOfWeek === 6 ? 16 * 60 : 20 * 60;
-        let cursor = startMinutes;
-
-        const minutesToHHMM = (min) => {
-            const hh = Math.floor(min / 60);
-            const mm = min % 60;
-            return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
-        };
-
-        while (cursor + 60 <= endMinutes) {
-            const attStart = cursor;
-            const attEnd = cursor + 60;
-            slots.push({start: minutesToHHMM(attStart), end: minutesToHHMM(attEnd)});
-            // avanzar 60 + 10 minutos (=70) para el siguiente inicio
-            cursor = attEnd + 10;
-        }
-
-        return slots;
+        const dayOfWeek = fechaSeleccionada.getDay();
+        if (dayOfWeek === 2) return HORARIOS_MARTES;
+        if (dayOfWeek === 5) return HORARIOS_VIERNES;
+        return [];
     }, [fechaSeleccionada]);
 
     const addMinutesToHHMM = (hhmm, minutesToAdd) => {
@@ -107,10 +101,10 @@ export default function CalendarioMensualHoras() {
             return;
         }
 
-        // Validar que no sea domingo
+        // Validar que sea martes o viernes
         const dayOfWeek = fecha.getDay();
-        if (dayOfWeek === 0) {
-            toast.error("Las atenciones son de Lunes a Sábado.\nLun-Vie: 9:00-20:00 | Sáb: 9:00-16:00", {
+        if (dayOfWeek !== 2 && dayOfWeek !== 5) {
+            toast.error("Las atenciones solo estan disponibles los dias Martes y Viernes.", {
                 duration: 4000,
                 style: {
                     background: '#FEE2E2',
@@ -373,7 +367,7 @@ export default function CalendarioMensualHoras() {
                     </h1>
 
                     <p className="max-w-md text-sm leading-6 text-slate-500">
-                        Reserva tu hora dental en segundos. Selecciona fecha y un bloque horario disponible.
+                        Reserva tu hora dental en segundos. Atencion disponible los dias Martes y Viernes.
                     </p>
                 </header>
 
@@ -431,8 +425,9 @@ export default function CalendarioMensualHoras() {
                                 const day = new Date(dia);
                                 day.setHours(0, 0, 0, 0);
                                 const isPastDay = day < today;
-                                const isSunday = dia.getDay() === 0;
-                                const isDisabled = isPastDay || isSunday;
+                                const dayOfWeek = dia.getDay();
+                                const isAvailableDay = dayOfWeek === 2 || dayOfWeek === 5;
+                                const isDisabled = isPastDay || !isAvailableDay;
                                 const isSelected = fechaSeleccionada?.toDateString() === dia.toDateString();
 
                                 return (
@@ -447,7 +442,7 @@ export default function CalendarioMensualHoras() {
                                         className={
                                             "h-10 flex items-center justify-center rounded-md text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-teal-200 focus:ring-offset-1 " +
                                             (isDisabled
-                                                ? "cursor-not-allowed border border-slate-200/70 bg-white/60 text-slate-400 shadow-sm" + (isSunday ? " opacity-50" : "")
+                                                ? "cursor-not-allowed border border-slate-200/70 bg-white/60 text-slate-400 shadow-sm" + (!isAvailableDay ? " opacity-50" : "")
                                                 : isSelected
                                                     ? "border border-teal-300 bg-gradient-to-b from-teal-100 to-white text-slate-900 shadow-md shadow-teal-900/10"
                                                     : "border border-teal-200/80 bg-white/90 text-slate-700 shadow-sm hover:bg-white hover:border-teal-300 hover:shadow-md hover:shadow-slate-900/5")
@@ -462,12 +457,27 @@ export default function CalendarioMensualHoras() {
                         )}
                     </div>
 
+                    {/* Mensaje informativo de dias disponibles */}
+                    <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 shrink-0 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p className="text-sm font-semibold text-emerald-800">Dias disponibles para agendar</p>
+                            <p className="text-xs text-emerald-700 mt-0.5">
+                                <span className="font-bold">Martes:</span> 09:30 - 10:30 - 11:30 - 12:30 hrs
+                                <span className="mx-2 text-emerald-400">|</span>
+                                <span className="font-bold">Viernes:</span> 15:30 - 16:30 - 17:30 - 18:30 hrs
+                            </p>
+                        </div>
+                    </div>
+
                     {/* Horarios */}
-                    {fechaSeleccionada && (
+                    {fechaSeleccionada && esDiaDisponible(fechaSeleccionada) && (
                         <div className="mt-5">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-sm font-semibold text-slate-800">
-                                    Agenda ({fechaSeleccionada.getDay() === 6 ? '09:00–16:00 (Sábado)' : '09:00–20:00'})
+                                    Agenda ({fechaSeleccionada.getDay() === 2 ? 'Martes — 09:30 a 13:30' : 'Viernes — 15:30 a 19:30'})
                                 </h3>
                                 <div className="flex items-center gap-3">
                                     <p className="text-xs text-slate-500">Bloques de 60 min</p>
@@ -587,7 +597,7 @@ export default function CalendarioMensualHoras() {
                         InnovaDent - Tu sonrisa, nuestra prioridad.
                     </p>
                     <p className="mt-2 text-[11px] text-slate-400">
-                        Horarios: Lun-Vie 9:00-20:00 | Sáb 9:00-16:00 | Dom Cerrado
+                        Horarios: Martes 09:30-13:30 | Viernes 15:30-19:30
                     </p>
                 </footer>
             </div>
