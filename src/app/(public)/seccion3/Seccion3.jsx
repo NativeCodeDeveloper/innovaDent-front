@@ -12,6 +12,7 @@ import {
     Wind
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import {toast} from "react-hot-toast";
 
 /**
  * Componente Sección 3: Tratamientos faciales
@@ -19,60 +20,54 @@ import { useRouter } from "next/navigation";
  */
 export default function Seccion3() {
     const router = useRouter();
+    const API = process.env.NEXT_PUBLIC_API_URL;
+    const [dataProductos, setDataProductos] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlay, setIsAutoPlay] = useState(true);
 
-    const servicios = [
-        {
-            id: 1,
+    const servicios = dataProductos.map((item) => {
+        return {
+            id: item.id_producto,
             icon: Zap,
-            titulo: "Bioestimuladores",
-            descripcion: "Uso médico-estético que activan los fibroblastos para generar colágeno y elastina propios.",
-            imagen: "/bioesti.png"
-        },
-        {
-            id: 2,
-            icon: FlaskConical,
-            titulo: "Miomodulación con toxina botulínica",
-            descripcion: "Tratamiento estético no invasivo que utiliza microinyecciones para relajar selectivamente los músculos faciales.",
-            imagen: "/miomodulacion.png"
-        },
-        {
-            id: 3,
-            icon: Pill,
-            titulo: "Rinomodelación",
-            descripcion: "Procedimiento estético no quirúrgico que usa rellenos inyectables para corregir pequeñas imperfecciones de la nariz, como un dorso irregular o una punta caída.",
-            imagen: "/rino.png"
-        },
-        {
-            id: 4,
-            icon: Droplets,
-            titulo: "Modelación de Labios",
-            descripcion: "Procedimiento de medicina estética no quirúrgico que utiliza ácido hialurónico para mejorar la forma, simetría, hidratación y volumen labial.",
-            imagen: "/labios.png"
-        },
-        {
-            id: 5,
-            icon: Eye,
-            titulo: "Tratamiento de ojeras",
-            descripcion: "Procedimientos estéticos mínimamente invasivos que busca mejorar la pigmentación, hidratación, firmeza y volumen de la zona.",
-            imagen: "/ojeras.png"
-        },
-        {
-            id: 6,
-            icon: Scissors,
-            titulo: "Lipopada",
-            descripcion: "Procedimiento quirúrgico estético, a menudo ambulatorio y con anestesia local, que elimina la grasa acumulada bajo el mentón y perfila la línea mandibular.",
-            imagen: "/lipopapada.png"
-        },
-        {
-            id: 7,
-            icon: Wind,
-            titulo: "Tratamiento para la caída del cabello",
-            descripcion: "Procedimiento estético que busca estimular el crecimiento del cabello mediante tratamientos no invasivos como microinyecciones o terapias con láser.",
-            imagen: "/Caidacabello.png"
-        },
-    ];
+            titulo: item.tituloProducto,
+            descripcion: item.descripcionProducto,
+            imagen: `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${item.imagenProducto}/card`
+        }
+    })
+
+
+
+    //FUNCION PARA CARGAR TODOS LOS PRODUCTOS
+    async function cargarProductosSeccion3() {
+        try {
+            //END POINT PARA CONECTAR AL BACKEND CON LS PETICCION HTTP
+            const endpoint = `${API}/producto/seleccionarProducto`;
+
+            const res = await fetch(endpoint, {
+                method: "GET",
+                headers: { Accept: "application/json" },
+                cache: "no-store",
+            });
+
+            if (!res.ok) {
+                return toast.error("Error al Cargar productos");
+
+            }else{
+
+                const data = await res.json();
+                setDataProductos(data);
+            }
+        } catch (error) {
+            return toast.error("Error al Cargar productos, contacte a soporte IT");
+        }
+    }
+    //uso de estado para disparar la funcion al recargar la pagina
+    useEffect(() => {
+        cargarProductosSeccion3();
+    }, []);
+
+
+
 
     const handleAgendarClick = () => {
         router.push("/AgendaProceso");
