@@ -84,22 +84,20 @@ export default function Seccion2PorQueElegirnos() {
     };
 
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: {},
         visible: {
-            opacity: 1,
             transition: {
-                staggerChildren: 0.12,
-                delayChildren: 0.1,
+                staggerChildren: 0.1,
+                delayChildren: 0.05,
             },
         },
     };
 
     const cardVariants = {
-        hidden: { opacity: 0, y: 30, scale: 0.95 },
+        hidden: { opacity: 0, y: 24 },
         visible: {
             opacity: 1,
             y: 0,
-            scale: 1,
             transition: {
                 duration: 0.5,
                 ease: [0.22, 1, 0.36, 1],
@@ -141,7 +139,7 @@ export default function Seccion2PorQueElegirnos() {
                         className="
                             group bg-white rounded-3xl p-8 md:p-12
                             shadow-sm hover:shadow-xl
-                            transition-all duration-500
+                            transition-shadow duration-500
                             border border-gray-100
                             flex flex-col md:flex-row md:items-center gap-8
                         "
@@ -190,7 +188,7 @@ export default function Seccion2PorQueElegirnos() {
                                     className="
                                         group bg-white rounded-3xl p-8 md:p-10
                                         shadow-sm hover:shadow-xl
-                                        transition-all duration-500
+                                        transition-shadow duration-500
                                         border border-gray-100
                                     "
                                 >
@@ -221,7 +219,7 @@ export default function Seccion2PorQueElegirnos() {
                         className="
                             group bg-white rounded-3xl p-8 md:p-12
                             shadow-sm hover:shadow-xl
-                            transition-all duration-500
+                            transition-shadow duration-500
                             border border-gray-100
                             flex flex-col md:flex-row md:items-center gap-8
                         "
