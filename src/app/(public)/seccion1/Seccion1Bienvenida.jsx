@@ -59,9 +59,9 @@ export default function Seccion1Bienvenida() {
         {
             id: 1,
             nombre: "Dra. Andrea Morán Rojas.",
-            especialidad: "Especialista en Rehabilitación oral y armonización facial. ",
+            especialidad: "Especialista en Rehabilitación oral y armonización facial.",
             descripcion: "Lidera planes de tratamiento personalizados con foco en salud, estética y seguimiento cercano para cada paciente.",
-            imagen: "/mono2.png",
+            imagen: "/logoinnovadent.png",
             cta: "Conoce a la Dra. Andrea",
             estudios: "Universidad de Talca",
             enfoque: "Odontología estética y rehabilitación funcional",
@@ -74,9 +74,9 @@ export default function Seccion1Bienvenida() {
         {
             id: 2,
             nombre: "Dr. Cristian Morales Corena.",
-            especialidad: "Especialista en Rehabilitación oral",
+            especialidad: "Especialista en Rehabilitación oral.",
             descripcion: "Especialista en rehabilitación funcional y procedimientos clínicos avanzados, con enfoque preciso y mínimamente invasivo.",
-            imagen: "/mono2.png",
+            imagen: "/logoinnovadent.png",
             cta: "Conoce al Dr. Cristian",
             estudios: "Universidad de Concepción",
             enfoque: "Cirugía oral y manejo clínico avanzado",

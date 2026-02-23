@@ -52,7 +52,7 @@ export default function Footer() {
                     <div>
                         <h3 className="text-lg font-semibold text-white">InnovaDent</h3>
                         <p className="mt-4 text-sm leading-6 text-gray-400">
-                            Clínica dental en Talca con más de 15 años de experiencia.
+                            Clínica dental en Talca con más de 10 años de experiencia.
                             Tecnología de vanguardia para tu mejor sonrisa.
                         </p>
 
@@ -124,7 +124,7 @@ export default function Footer() {
                             <li className="flex gap-3">
                                 <MapPin className="mt-0.5 h-5 w-5 flex-none text-teal-400" />
                                 <span>
-                                    Calle 3 norte #1650, Talca Región del Maule, Chile
+                                    Calle tres norte #1650, Talca Región del Maule, Chile
                                 </span>
                             </li>
 
@@ -168,7 +168,7 @@ export default function Footer() {
                             className="absolute inset-0 h-full w-full"
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            src="https://www.google.com/maps?q=1+Norte+1650,+Talca,+Regi%C3%B3n+del+Maule,+Chile&output=embed"
+                            src="https://maps.google.com/maps?q=-35.4246506,-71.6529325&hl=es&z=16&output=embed"
                         />
                     </div>
                 </div>

@@ -61,7 +61,7 @@ export const metadata = {
     siteName: "InnovaDent",
     images: [
       {
-        url: `${metadataBase.href.replace(/\/$/, "")}/og-innovadent.png`,
+        url: `${metadataBase.href.replace(/\/$/, "")}/logoinnovadent.png`,
         width: 1200,
         height: 630,
         alt: "InnovaDent - Clínica Dental Profesional",
@@ -75,7 +75,7 @@ export const metadata = {
     title: "InnovaDent | Clínica Dental Profesional",
     description:
       "Tratamientos dentales personalizados de la más alta calidad. Especialistas en salud bucal y estética dental.",
-    images: [`${metadataBase.href.replace(/\/$/, "")}/og-innovadent.png`],
+    images: [`${metadataBase.href.replace(/\/$/, "")}/logoinnovadent.png`],
   },
 };
 
