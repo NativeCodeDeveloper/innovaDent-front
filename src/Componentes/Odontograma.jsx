@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useImperativeHandle, forwardRef } from "react";
+import { toast } from "react-hot-toast";
 
 /* ═══════════════════════════════════════════════════════════════
    ODONTOGRAMA INTERACTIVO COMPLETO — InnovaDent
@@ -219,7 +220,8 @@ function QuadrantRow({ teeth, teethData, tool, onClickSurface, onClickWhole, isT
 /* ═════════════════════════════════════════════
    COMPONENTE PRINCIPAL: Odontograma
    ═════════════════════════════════════════════ */
-const Odontograma = forwardRef(function Odontograma({ patientId, initialData, onChange }, ref) {
+const Odontograma = forwardRef(function Odontograma({ patientId, idOdontograma, initialData, onChange }, ref) {
+    const API = process.env.NEXT_PUBLIC_API_URL;
     const [teeth, setTeeth] = useState(() => {
         if (initialData?.teeth) return initialData.teeth;
         return buildInitialState();
@@ -304,10 +306,61 @@ const Odontograma = forwardRef(function Odontograma({ patientId, initialData, on
         });
     }, [activeTool]);
 
-    // ── Reset ──
-    const handleReset = () => {
-        setTeeth(buildInitialState());
-        setTooltip(null);
+    // ── Actualizar odontograma ──
+    const [guardando, setGuardando] = useState(false);
+
+    const handleActualizar = async () => {
+        if (!idOdontograma) {
+            return toast.error("No se puede actualizar: falta el id del odontograma");
+        }
+
+        setGuardando(true);
+        try {
+            for (const [numeroDiente, datosDiente] of Object.entries(teeth)) {
+                const { surfaces, wholeTooth } = datosDiente;
+
+                // Solo enviar dientes que tengan algo marcado
+                const tieneAlgo =
+                    surfaces.V || surfaces.L || surfaces.M || surfaces.D || surfaces.O ||
+                    wholeTooth.absent || wholeTooth.restoRadicular ||
+                    wholeTooth.protesisFija || wholeTooth.prosthesisExisting;
+
+                if (!tieneAlgo) continue;
+
+                const res = await fetch(`${API}/odontograma/actualizarDiente`, {
+                    method: "POST",
+                    headers: { Accept: "application/json", "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        id_odontograma: idOdontograma,
+                        numero_diente: parseInt(numeroDiente),
+                        datos: {
+                            ausente: wholeTooth.absent,
+                            resto_radicular: wholeTooth.restoRadicular,
+                            protesis_fija: wholeTooth.protesisFija,
+                            protesis_existente: wholeTooth.prosthesisExisting,
+                            cara_V: surfaces.V || null,
+                            cara_L: surfaces.L || null,
+                            cara_M: surfaces.M || null,
+                            cara_D: surfaces.D || null,
+                            cara_O: surfaces.O || null,
+                        },
+                    }),
+                    mode: "cors",
+                });
+
+                if (!res.ok) {
+                    toast.error(`Error al actualizar diente ${numeroDiente}`);
+                    setGuardando(false);
+                    return;
+                }
+            }
+
+            toast.success("Odontograma actualizado correctamente");
+        } catch (error) {
+            toast.error("Error al actualizar el odontograma");
+        } finally {
+            setGuardando(false);
+        }
     };
 
     return (
@@ -334,10 +387,11 @@ const Odontograma = forwardRef(function Odontograma({ patientId, initialData, on
 
                     <div className="ml-auto">
                         <button
-                            onClick={handleReset}
-                            className="rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-100 transition-colors"
+                            onClick={handleActualizar}
+                            disabled={guardando}
+                            className="inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 transition-all duration-150 shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
                         >
-                            Reset odontograma
+                            {guardando ? "Guardando..." : "Actualizar odontograma"}
                         </button>
                     </div>
                 </div>

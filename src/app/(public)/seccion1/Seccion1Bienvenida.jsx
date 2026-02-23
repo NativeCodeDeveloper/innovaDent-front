@@ -24,6 +24,36 @@ export default function Seccion1Bienvenida() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlay, setIsAutoPlay] = useState(true);
     const [tarjetasVolteadas, setTarjetasVolteadas] = useState({});
+    const [listapublicaciones, setListaPublicaciones] = useState([]);
+
+    const API = process.env.NEXT_PUBLIC_API_URL;
+
+
+
+    async function listarCarrusel(){
+        try {
+            const res = await fetch(`${API}/publicaciones/seleccionarPublicaciones`, {
+                method: "GET",
+                headers: {Accept: "application/json"},
+                mode: "cors"
+            });
+
+            if (!res.ok) {
+                console.log(`Error en la respuesta del backend`);
+            }else{
+                const respuestaBackend = await res.json();
+                setListaPublicaciones(respuestaBackend);
+            }
+        }catch (error) {
+            console.error("Error al obtener profesionales:", error);
+        }
+    }
+
+    useEffect(() => {
+        listarCarrusel();
+    }, []);
+
+
 
     const profesionales = [
         {
@@ -31,7 +61,7 @@ export default function Seccion1Bienvenida() {
             nombre: "Dra. Andrea Morán Rojas.",
             especialidad: "Especialista en Rehabilitación oral y armonización facial. ",
             descripcion: "Lidera planes de tratamiento personalizados con foco en salud, estética y seguimiento cercano para cada paciente.",
-            imagen: "/mujer1.png",
+            imagen: "/mono2.png",
             cta: "Conoce a la Dra. Andrea",
             estudios: "Universidad de Talca",
             enfoque: "Odontología estética y rehabilitación funcional",
@@ -46,7 +76,7 @@ export default function Seccion1Bienvenida() {
             nombre: "Dr. Cristian Morales Corena.",
             especialidad: "Especialista en Rehabilitación oral",
             descripcion: "Especialista en rehabilitación funcional y procedimientos clínicos avanzados, con enfoque preciso y mínimamente invasivo.",
-            imagen: "/hombre3.png",
+            imagen: "/mono2.png",
             cta: "Conoce al Dr. Cristian",
             estudios: "Universidad de Concepción",
             enfoque: "Cirugía oral y manejo clínico avanzado",
@@ -72,7 +102,8 @@ export default function Seccion1Bienvenida() {
      * - Formato: JPG, PNG o WebP
      * - Orientación: Cuadrada (1:1)
      */
-    const servicios = [
+    {/*
+        const servicios = [
         {
             id: 1,
             icon: Smile,
@@ -83,67 +114,22 @@ export default function Seccion1Bienvenida() {
             imagePlaceholder: "bg-linear-to-br from-teal-100 to-cyan-100",
             imagen: "/ortodoncia.png"
         },
-        {
-            id: 2,
-            icon: Activity,
-            titulo: "Endodoncia",
-            descripcion: "Tratamiento de conductos radiculares con equipamiento especializado. Salvamos tu pieza dental con procedimientos mínimamente invasivos en Talca.",
-            color: "text-teal-600",
-            bg: "bg-gradient-to-br from-teal-50 to-emerald-50",
-            imagePlaceholder: "bg-linear-to-br from-teal-100 to-emerald-100",
-            imagen: "/endodoncia.png"
-        },
-        {
-            id: 3,
-            icon: Scissors,
-            titulo: "Cirugía Dental",
-            descripcion: "Procedimientos quirúrgicos especializados con anestesia local. Extracciones, implantes y cirugía maxilofacial en Talca.",
-            color: "text-teal-600",
-            bg: "bg-gradient-to-br from-teal-50 to-blue-50",
-            imagePlaceholder: "bg-linear-to-br from-teal-100 to-blue-100",
-            imagen: "/cirugia.png"
-        },
-        {
-            id: 4,
-            icon: RefreshCw,
-            titulo: "Rehabilitación Oral",
-            descripcion: "Restauración completa de la función masticatoria y estética. Prótesis fijas, removibles e implantes para recuperar tu sonrisa en Talca.",
-            color: "text-teal-600",
-            bg: "bg-gradient-to-br from-teal-50 to-indigo-50",
-            imagePlaceholder: "bg-linear-to-br from-teal-100 to-indigo-100",
-            imagen: "/rehabilitacion.png"
-        },
-        {
-            id: 5,
-            icon: Sparkles,
-            titulo: "Estética oral",
-            descripcion: "Transformación estética dental personalizada. Carillas, blanqueamiento y armonización facial para tu mejor versión en Talca.",
-            color: "text-teal-600",
-            bg: "bg-gradient-to-br from-teal-50 to-violet-50",
-            imagePlaceholder: "bg-linear-to-br from-teal-100 to-violet-100",
-            imagen: "/diseñosonr.png"
-        },
-        {
-            id: 6,
-            icon: Shield,
-            titulo: "Implantes Dentales",
-            descripcion: "Soluciones protésicas de alta calidad y durabilidad. Coronas, puentes y dentaduras fabricadas con materiales premium en Talca.",
-            color: "text-teal-600",
-            bg: "bg-gradient-to-br from-teal-50 to-purple-50",
-            imagePlaceholder: "bg-linear-to-br from-teal-100 to-purple-100",
-            imagen: "/protesis.png"
-        },
-        {
-            id: 7,
-            icon: Heart,
-            titulo: "Exodoncia",
-            descripcion: "Procedimiento quirúrgico de la odontología que consiste en la extracción de un diente o muela de su alvéolo óseo.",
-            color: "text-teal-600",
-            bg: "bg-gradient-to-br from-teal-50 to-pink-50",
-            imagePlaceholder: "bg-linear-to-br from-teal-100 to-pink-100",
-            imagen: "/exodon.png"
-        },
     ];
+    */}
+
+
+
+    const servicios = listapublicaciones.map((publicacion) => ({
+
+        id: publicacion.id_publicaciones,
+        icon: Smile,
+        titulo: publicacion.descripcionPublicaciones,
+        descripcion: "",
+        color: "text-teal-600",
+        bg: "bg-gradient-to-br from-teal-50 to-cyan-50",
+        imagePlaceholder: "bg-linear-to-br from-teal-100 to-cyan-100",
+        imagen: `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${publicacion.imagenPublicaciones_primera}/full`
+    }));
 
     const handleAgendarClick = () => {
         router.push('/AgendaProceso');
@@ -210,9 +196,9 @@ export default function Seccion1Bienvenida() {
                     <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 md:gap-10 items-center justify-center">
                         <div className="flex justify-center lg:justify-right lg:pr-8">
                             <img
-                                src="/sonrisainnova.png"
+                                src="/image12.png"
                                 alt="Logo Innovadent"
-                                className="w-115 object-contain px-4 md:px-0"
+                                className="object-contain px-4 md:px-0 w-full max-w-sm md:max-w-md lg:max-w-lg"
                             />
                         </div>
 
