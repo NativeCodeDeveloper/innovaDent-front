@@ -41,9 +41,9 @@ export default function OrbBackground({ children }) {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const cx = canvas.width / 2;
+      const cx = canvas.width * 0.58;
       const cy = canvas.height / 2;
-      const radius = Math.min(canvas.width, canvas.height) * 0.32;
+      const radius = Math.min(canvas.width, canvas.height) * 0.5;
 
       for (const p of particles) {
         // Spherical coordinates
@@ -71,7 +71,7 @@ export default function OrbBackground({ children }) {
 
         // Depth-based size & opacity
         const depth = (z3d + 1) / 2; // 0..1
-        const dotSize = (1.2 + depth * 1.8) * perspective;
+        const dotSize = (0.6 + depth * 0.9) * perspective;
         const alpha = 0.4 + depth * 0.6;
 
         const color = getColor(ny, nx, time);

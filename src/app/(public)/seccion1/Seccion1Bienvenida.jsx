@@ -61,7 +61,11 @@ export default function Seccion1Bienvenida() {
             nombre: "Dra. Andrea Morán Rojas.",
             especialidad: "Especialista en Rehabilitación oral y armonización facial.",
             descripcion: "Lidera planes de tratamiento personalizados con foco en salud, estética y seguimiento cercano para cada paciente.",
+<<<<<<< HEAD
             imagen: "/logoinnovadent.png",
+=======
+            imagen: "/andrea.png",
+>>>>>>> 58f7c83 (Guardado1 Envio a QA)
             cta: "Conoce a la Dra. Andrea",
             estudios: "Universidad de Talca",
             enfoque: "Odontología estética y rehabilitación funcional",
@@ -76,7 +80,11 @@ export default function Seccion1Bienvenida() {
             nombre: "Dr. Cristian Morales Corena.",
             especialidad: "Especialista en Rehabilitación oral.",
             descripcion: "Especialista en rehabilitación funcional y procedimientos clínicos avanzados, con enfoque preciso y mínimamente invasivo.",
+<<<<<<< HEAD
             imagen: "/logoinnovadent.png",
+=======
+            imagen: "/cristian.png",
+>>>>>>> 58f7c83 (Guardado1 Envio a QA)
             cta: "Conoce al Dr. Cristian",
             estudios: "Universidad de Concepción",
             enfoque: "Cirugía oral y manejo clínico avanzado",
@@ -249,7 +257,7 @@ export default function Seccion1Bienvenida() {
                                                                 <img
                                                                     src={profesional.imagen}
                                                                     alt={profesional.nombre}
-                                                                    className="h-[88%] w-[88%] object-contain"
+                                                                    className="h-full w-full object-cover"
                                                                 />
                                                             </div>
                                                         </div>
