@@ -27,11 +27,11 @@ export default function Seccion3() {
 
     const servicios = dataProductos.map((item) => {
         return {
-            id: item.id_producto,
+            id: item.id_publicacionesTituloDescripcion,
             icon: Zap,
-            titulo: item.tituloProducto,
-            descripcion: item.descripcionProducto,
-            imagen: `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${item.imagenProducto}/card`
+            titulo: item.publicacionesTitulo,
+            descripcion: item.publicacionesDescripcion,
+            imagen: `https://imagedelivery.net/aCBUhLfqUcxA2yhIBn1fNQ/${item.publicacionesTituloDescripcionImagen}/card`
         }
     })
 
@@ -41,7 +41,7 @@ export default function Seccion3() {
     async function cargarProductosSeccion3() {
         try {
             //END POINT PARA CONECTAR AL BACKEND CON LS PETICCION HTTP
-            const endpoint = `${API}/producto/seleccionarProducto`;
+            const endpoint = `${API}/publicacionesTituloDetalle/seleccionarPublicacionesTituloDetalle`;
 
             const res = await fetch(endpoint, {
                 method: "GET",

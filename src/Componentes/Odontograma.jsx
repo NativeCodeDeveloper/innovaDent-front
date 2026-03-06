@@ -189,7 +189,10 @@ function ToothSVG({ number, data, tool, onClickSurface, onClickWhole, isTemporar
                     width={inner * 2} height={inner * 2}
                     fill="transparent"
                     onClick={(e) => { e.stopPropagation(); onClickWhole(number); }}
-                    style={{ cursor: tool && TOOLS.find(t => t.id === tool)?.type === "whole" ? "pointer" : "default" }}
+                    style={{
+                        pointerEvents: tool && TOOLS.find(t => t.id === tool)?.type === "whole" ? "auto" : "none",
+                        cursor: tool && TOOLS.find(t => t.id === tool)?.type === "whole" ? "pointer" : "default",
+                    }}
                 />
             </svg>
         </div>

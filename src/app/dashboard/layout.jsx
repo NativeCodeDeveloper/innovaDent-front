@@ -2,6 +2,7 @@
 import Link from "next/link";
 import MobileNav from "./MobileNav";
 
+
 export const metadata = {
     title: "Dashboard",
     description: "Panel de administración",
@@ -134,46 +135,63 @@ export default function DashboardLayout({ children }) {
                                         <span className="h-1 w-1 rounded-full bg-white/20 group-hover/link:bg-cyan-400 group-hover/link:shadow-[0_0_6px_rgba(34,211,238,0.5)] transition-all duration-150" />
                                         Carrusel de Portada
                                     </Link>
+
                                     <Link
-                                        href="/dashboard/ingresoProductos"
+                                        href="/dashboard/publicacionesTituloDescripcion"
                                         className="group/link flex items-center gap-2 rounded-md px-2.5 py-[6px] text-[12px] font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
                                     >
                                         <span className="h-1 w-1 rounded-full bg-white/20 group-hover/link:bg-cyan-400 group-hover/link:shadow-[0_0_6px_rgba(34,211,238,0.5)] transition-all duration-150" />
-                                        Tratamientos y Servicios
+                                        Publicaciones Clinicas
                                     </Link>
+
                                 </div>
                             </details>
+
 
                             {/* — Cobro por Consulta — */}
                             <details className="group">
                                 <summary className="flex items-center justify-between rounded-md px-2.5 py-1.5 text-[10px] font-semibold tracking-wide text-white/40 hover:text-white/60 transition-colors duration-150 cursor-pointer list-none select-none mt-2">
-                                    <span>Cobro por Consulta</span>
+                                    <span>Presupuestos</span>
                                     <svg className="h-3 w-3 text-white/25 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
                                     </svg>
                                 </summary>
                                 <div className="mt-0.5 ml-2.5 space-y-px border-l border-white/[0.06] pl-2.5">
                                     <Link
+                                    href="/dashboard/ingresoProductos"
+                                    className="group/link flex items-center gap-2 rounded-md px-2.5 py-[6px] text-[12px] font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
+                                >
+                                    <span className="h-1 w-1 rounded-full bg-white/20 group-hover/link:bg-cyan-400 group-hover/link:shadow-[0_0_6px_rgba(34,211,238,0.5)] transition-all duration-150" />
+                                    Tratamientos
+                                </Link>
+
+
+                                    <Link
+                                        href="/dashboard/categoriasProductos"
+                                        className="group/link flex items-center gap-2 rounded-md px-2.5 py-[6px] text-[12px] font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
+                                    >
+                                        <span className="h-1 w-1 rounded-full bg-white/20 group-hover/link:bg-cyan-400 group-hover/link:shadow-[0_0_6px_rgba(34,211,238,0.5)] transition-all duration-150" />
+                                        Categoria de Tratamientos
+                                    </Link>
+
+
+                                    <Link
+                                        href="/dashboard/presupuestoTratamiento"
+                                        className="group/link flex items-center gap-2 rounded-md px-2.5 py-[6px] text-[12px] font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
+                                    >
+                                        <span className="h-1 w-1 rounded-full bg-white/20 group-hover/link:bg-cyan-400 group-hover/link:shadow-[0_0_6px_rgba(34,211,238,0.5)] transition-all duration-150" />
+                                        Generacion de Presupuestos
+                                    </Link>
+
+
+                                    <Link
                                         href="/dashboard/profesionales"
                                         className="group/link flex items-center gap-2 rounded-md px-2.5 py-[6px] text-[12px] font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
                                     >
                                         <span className="h-1 w-1 rounded-full bg-white/20 group-hover/link:bg-cyan-400 group-hover/link:shadow-[0_0_6px_rgba(34,211,238,0.5)] transition-all duration-150" />
-                                        Registro de Profesionales
+                                        Profesionales Disponibles
                                     </Link>
-                                    <Link
-                                        href="/dashboard/serviciosAgendamiento"
-                                        className="group/link flex items-center gap-2 rounded-md px-2.5 py-[6px] text-[12px] font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
-                                    >
-                                        <span className="h-1 w-1 rounded-full bg-white/20 group-hover/link:bg-cyan-400 group-hover/link:shadow-[0_0_6px_rgba(34,211,238,0.5)] transition-all duration-150" />
-                                        Prestaciones en Agenda
-                                    </Link>
-                                    <Link
-                                        href="/dashboard/tarifaServicio"
-                                        className="group/link flex items-center gap-2 rounded-md px-2.5 py-[6px] text-[12px] font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
-                                    >
-                                        <span className="h-1 w-1 rounded-full bg-white/20 group-hover/link:bg-cyan-400 group-hover/link:shadow-[0_0_6px_rgba(34,211,238,0.5)] transition-all duration-150" />
-                                        Cobro por Consulta
-                                    </Link>
+
                                 </div>
                             </details>
 

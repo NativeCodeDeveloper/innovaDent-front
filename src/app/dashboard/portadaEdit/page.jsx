@@ -24,6 +24,7 @@ export default function CarruselPortada() {
 
 
 
+
     function capturarImagen(event){
         const file = event.target.files?.[0] ?? null;
         if(vistaPrevia){
@@ -93,6 +94,8 @@ export default function CarruselPortada() {
                 headers: {Accept: "application/json,"},
                 mode: "cors",
             })
+
+
 
             if(!res.ok) {
                 return toast.error('No ha sido posible cargar las imagenes del carrusel porfavor contacte a soporte de NativeCode');
