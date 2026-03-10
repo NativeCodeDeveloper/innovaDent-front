@@ -32,11 +32,12 @@ export default function EdicionFichaClinica() {
         if (!fecha) {
             return null;
         } else {
-            const date = new Date(fecha);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1);
-            const day = String(date.getDate());
-            return `${day}-${month}-${year}`;
+            // Parsear "yyyy-mm-dd" como fecha LOCAL para evitar desfase UTC
+            const parts = String(fecha).split("T")[0].split("-");
+            const year = parts[0];
+            const month = parts[1];
+            const day = parts[2];
+            return `${Number(day)}-${Number(month)}-${year}`;
         }
     }
 

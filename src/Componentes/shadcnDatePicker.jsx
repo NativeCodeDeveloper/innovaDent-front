@@ -12,10 +12,20 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
+function parseDateLocal(dateStr) {
+    if (!dateStr) return undefined
+    // "yyyy-mm-dd" → parsear como fecha LOCAL, no UTC
+    const [y, m, d] = dateStr.split("-").map(Number)
+    return new Date(y, m - 1, d)
+}
+
 export default function ShadcnDatePicker({label = "Fecha", value, onChange}) {
     const [open, setOpen] = React.useState(false)
-    const initialDate = value ? new Date(value) : undefined
-    const [date, setDate] = React.useState(initialDate)
+    const [date, setDate] = React.useState(() => parseDateLocal(value))
+
+    React.useEffect(() => {
+        setDate(parseDateLocal(value))
+    }, [value])
 
     function formatDate(d) {
         if (!d) return ""
