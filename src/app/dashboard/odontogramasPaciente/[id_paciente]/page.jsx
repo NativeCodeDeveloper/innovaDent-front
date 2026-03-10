@@ -326,12 +326,15 @@ export default function OdontogramasPaciente() {
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                                     </svg>
                                                     <span className="text-xs text-slate-500">
-                                                        {new Date(item.fecha + "T12:00:00").toLocaleDateString("es-CL", {
-                                                            weekday: "long",
-                                                            year: "numeric",
-                                                            month: "long",
-                                                            day: "numeric",
-                                                        })}
+                                                        {(() => {
+                                                            const s = String(item.fecha).split("T")[0].split("-");
+                                                            return new Date(Number(s[0]), Number(s[1]) - 1, Number(s[2])).toLocaleDateString("es-CL", {
+                                                                weekday: "long",
+                                                                year: "numeric",
+                                                                month: "long",
+                                                                day: "numeric",
+                                                            });
+                                                        })()}
                                                     </span>
                                                 </div>
                                             </div>
