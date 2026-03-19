@@ -63,12 +63,20 @@ export default function PresupuestoTratamiento() {
 
 
     function generarPresupuesto(servicioCotizado) {
-        setListaPresupuesto(servicioCotizadoPrev => [...servicioCotizadoPrev,servicioCotizado]);
+        setListaPresupuesto(servicioCotizadoPrev => [...servicioCotizadoPrev, { ...servicioCotizado, pieza: "" }]);
         let valorPresupuesto = servicioCotizado.valorProducto;
         listaPresupuesto.forEach(element => {
             valorPresupuesto += element.valorProducto;
         })
         setTotalPresupuesto(valorPresupuesto);
+    }
+
+    function actualizarPiezaPresupuesto(indexActualizar, pieza) {
+        setListaPresupuesto(prev =>
+            prev.map((item, index) =>
+                index === indexActualizar ? { ...item, pieza } : item
+            )
+        );
     }
 
     function quitarDelPresupuesto(indexEliminar) {
@@ -202,10 +210,11 @@ export default function PresupuestoTratamiento() {
 
         // Tabla de servicios
         y += fichaH + 8;
-        const columns = ["N°", "Servicio / Tratamiento", "Valor"];
+        const columns = ["N°", "Servicio / Tratamiento", "Pieza", "Valor"];
         const rows = listaPresupuesto.map((servicio, i) => [
             String(i + 1),
             servicio.tituloProducto,
+            servicio.pieza?.trim() || "-",
             formatoCLP.format(servicio.valorProducto),
         ]);
 
@@ -232,8 +241,9 @@ export default function PresupuestoTratamiento() {
             },
             columnStyles: {
                 0: { halign: "center", cellWidth: 14 },
-                1: { halign: "left" },
-                2: { halign: "right", cellWidth: 38, fontStyle: "bold" },
+                1: { halign: "left", cellWidth: 72 },
+                2: { halign: "center", cellWidth: 28 },
+                3: { halign: "right", cellWidth: 30, fontStyle: "bold" },
             },
             styles: {
                 lineColor: slate200,
@@ -407,20 +417,34 @@ export default function PresupuestoTratamiento() {
                                         {listaPresupuesto.map((servicio, index) => (
                                             <div
                                                 key={index}
-                                                className="flex items-center justify-between rounded-lg border border-slate-100 bg-white px-3.5 py-3 hover:border-slate-200 hover:shadow-sm transition-all duration-150"
+                                                className="rounded-lg border border-slate-100 bg-white px-3.5 py-3 hover:border-slate-200 hover:shadow-sm transition-all duration-150"
                                             >
-                                                <div className="min-w-0 flex-1">
-                                                    <p className="text-sm font-medium text-slate-800 truncate">{servicio.tituloProducto}</p>
-                                                    <p className="text-xs text-sky-600 font-semibold">{formatoCLP.format(servicio.valorProducto)}</p>
+                                                <div className="flex items-start justify-between gap-3">
+                                                    <div className="min-w-0 flex-1">
+                                                        <p className="text-sm font-medium text-slate-800 truncate">{servicio.tituloProducto}</p>
+                                                        <p className="text-xs text-sky-600 font-semibold">{formatoCLP.format(servicio.valorProducto)}</p>
+                                                    </div>
+                                                    <button
+                                                        onClick={() => quitarDelPresupuesto(index)}
+                                                        className="flex-shrink-0 inline-flex items-center justify-center h-7 w-7 rounded-md border border-red-200 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600 transition-all active:scale-95"
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                                        </svg>
+                                                    </button>
                                                 </div>
-                                                <button
-                                                    onClick={() => quitarDelPresupuesto(index)}
-                                                    className="ml-3 flex-shrink-0 inline-flex items-center justify-center h-7 w-7 rounded-md border border-red-200 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600 transition-all active:scale-95"
-                                                >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                                                    </svg>
-                                                </button>
+                                                <div className="mt-3">
+                                                    <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+                                                        Pieza
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        value={servicio.pieza || ""}
+                                                        onChange={(e) => actualizarPiezaPresupuesto(index, e.target.value)}
+                                                        placeholder="Ej: 1.6, 2.1, Incisivo central"
+                                                        className="h-9 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 placeholder:text-slate-400"
+                                                    />
+                                                </div>
                                             </div>
                                         ))}
                                     </div>

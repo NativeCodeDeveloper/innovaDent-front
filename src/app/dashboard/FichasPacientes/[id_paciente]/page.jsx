@@ -245,6 +245,24 @@ export default function Paciente() {
         return "SIN DEFINIR";
     }
 
+    function obtenerTextoEstadoFicha(estado) {
+        if (estado === 1 || estado === "1") return "RESERVADA";
+        if (estado === 2 || estado === "2") return "CONFIRMADA";
+        if (estado === 3 || estado === "3") return "ANULADA";
+        if (estado === 4 || estado === "4") return "ASISTE";
+        if (estado === 5 || estado === "5") return "NO ASISTE";
+        return "SIN ESTADO";
+    }
+
+    function obtenerClaseEstadoFicha(estado) {
+        if (estado === 1 || estado === "1") return "bg-indigo-50 border-indigo-100 text-indigo-700";
+        if (estado === 2 || estado === "2") return "bg-emerald-50 border-emerald-100 text-emerald-700";
+        if (estado === 3 || estado === "3") return "bg-red-50 border-red-100 text-red-700";
+        if (estado === 4 || estado === "4") return "bg-emerald-50 border-emerald-100 text-emerald-700";
+        if (estado === 5 || estado === "5") return "bg-amber-50 border-amber-100 text-amber-700";
+        return "bg-slate-50 border-slate-200 text-slate-600";
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50/30">
             <ToasterClient/>
@@ -429,6 +447,9 @@ export default function Paciente() {
                                     </div>
                                     {/* Chips: Motivo + Profesional */}
                                     <div className="flex flex-wrap items-center gap-2 ml-11 sm:ml-0">
+                                        <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md border text-xs font-medium ${obtenerClaseEstadoFicha(ficha.estadoFicha)}`}>
+                                            <span className="opacity-70">Estado:</span> {obtenerTextoEstadoFicha(ficha.estadoFicha)}
+                                        </span>
                                         <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-sky-50 border border-sky-100 text-xs font-medium text-sky-700">
                                             <span className="text-sky-400">Motivo Consulta:</span> {ficha.tipoAtencion || '-'}
                                         </span>
