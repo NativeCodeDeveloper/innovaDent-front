@@ -330,10 +330,265 @@ export default function PresupuestoTratamiento() {
         doc.text("Documento generado digitalmente", pageW - marginR, footerY, { align: "right" });
         doc.text(`Pagina 1 de 1`, pageW - marginR, footerY + 4, { align: "right" });
 
-        doc.save("presupuesto-tratamiento.pdf");
+        doc.save("presupuesto-tratamiento-dental.pdf");
     }
 
 
+    async function descargarPresupuestoPDFBlack() {
+        const doc = new jsPDF("p", "mm", "letter");
+        const pageW = doc.internal.pageSize.getWidth();
+        const pageH = doc.internal.pageSize.getHeight();
+        const marginL = 18;
+        const marginR = 18;
+        const contentW = pageW - marginL - marginR;
+
+        // Colores negro y dorado
+        const gold = [197, 164, 90];
+        const goldLight = [218, 195, 137];
+        const darkBg = [30, 30, 30];
+        const darkCard = [40, 40, 40];
+        const darkBorder = [60, 60, 60];
+        const textLight = [240, 240, 240];
+        const textMuted = [170, 170, 170];
+        const textDim = [120, 120, 120];
+
+        // Fondo oscuro de pagina completa
+        doc.setFillColor(...darkBg);
+        doc.rect(0, 0, pageW, pageH, "F");
+
+        // Logo
+        try {
+            const logoRes = await fetch("/black.png");
+            if (logoRes.ok) {
+                const logoBuffer = await logoRes.arrayBuffer();
+                const logoBytes = new Uint8Array(logoBuffer);
+                let binary = "";
+                for (let i = 0; i < logoBytes.length; i++) {
+                    binary += String.fromCharCode(logoBytes[i]);
+                }
+                const logoBase64 = btoa(binary);
+                doc.addImage(logoBase64, "PNG", marginL, 8, 24, 24);
+            }
+        } catch (_) {}
+
+        // Nombre y subtitulo al lado del logo
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(13);
+        doc.setTextColor(...gold);
+        doc.text("DRA. ANDREA MORÁN ROJAS", marginL + 28, 20);
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+        doc.setTextColor(...goldLight);
+        doc.text("Rehabilitación oral y armonización facial", marginL + 28, 26);
+
+        // Fecha alineada a la derecha
+        const ahora = new Date();
+        const fechaStr = ahora.toLocaleDateString("es-CL", { day: "2-digit", month: "long", year: "numeric" });
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+        doc.setTextColor(...textMuted);
+        doc.text(fechaStr, pageW - marginR, 18, { align: "right" });
+        doc.setFontSize(8);
+        doc.setTextColor(...textDim);
+        doc.text(`Documento generado el ${ahora.toLocaleDateString("es-CL")} a las ${ahora.toLocaleTimeString("es-CL", { hour: "2-digit", minute: "2-digit" })}`, pageW - marginR, 23, { align: "right" });
+
+        // Linea separadora dorada
+        let y = 36;
+        doc.setDrawColor(...gold);
+        doc.setLineWidth(0.8);
+        doc.line(marginL, y, pageW - marginR, y);
+
+        // Titulo del documento
+        y += 10;
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(17);
+        doc.setTextColor(...textLight);
+        doc.text("Presupuesto de Tratamiento", marginL, y);
+
+        // Subtitulo
+        y += 6;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+        doc.setTextColor(...textMuted);
+        doc.text("Detalle de servicios y valores estimados para el paciente.", marginL, y);
+
+        // Ficha clinica del paciente - caja oscura
+        y += 10;
+        const fichaH = 32;
+        doc.setFillColor(...darkCard);
+        doc.setDrawColor(...darkBorder);
+        doc.setLineWidth(0.3);
+        doc.roundedRect(marginL, y, contentW, fichaH, 3, 3, "FD");
+
+        const fichaX = marginL + 5;
+        const fichaX2 = marginL + contentW / 2 + 5;
+        let fichaY = y + 7;
+
+        // Titulo ficha
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(8);
+        doc.setTextColor(...gold);
+        doc.text("DATOS DEL PACIENTE", fichaX, fichaY);
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(8);
+        doc.setTextColor(...gold);
+        doc.text("DATOS CLÍNICOS", fichaX2, fichaY);
+
+        fichaY += 7;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+        doc.setTextColor(...textLight);
+
+        // Col izquierda: paciente
+        doc.setFont("helvetica", "bold");
+        doc.text("Paciente:", fichaX, fichaY);
+        doc.setFont("helvetica", "normal");
+        doc.text(nombrePaciente || "-", fichaX + 22, fichaY);
+
+        // Col derecha: profesional
+        const profesionalLabel = listaProfesionales.find(p => String(p.id_profesional) === String(nombreProfesional));
+        doc.setFont("helvetica", "bold");
+        doc.text("Profesional:", fichaX2, fichaY);
+        doc.setFont("helvetica", "normal");
+        doc.text(profesionalLabel?.nombreProfesional || "-", fichaX2 + 27, fichaY);
+
+        fichaY += 7;
+        doc.setFont("helvetica", "bold");
+        doc.text("RUT / DNI:", fichaX, fichaY);
+        doc.setFont("helvetica", "normal");
+        doc.text(rutaPaciente || "-", fichaX + 24, fichaY);
+
+        doc.setFont("helvetica", "bold");
+        doc.text("Fecha:", fichaX2, fichaY);
+        doc.setFont("helvetica", "normal");
+        doc.text(fechaStr, fichaX2 + 15, fichaY);
+
+        // Tabla de servicios
+        y += fichaH + 8;
+        const columns = ["N°", "Servicio / Tratamiento", "Pieza", "Valor"];
+        const rows = listaPresupuesto.map((servicio, i) => [
+            String(i + 1),
+            servicio.tituloProducto,
+            servicio.pieza?.trim() || "-",
+            formatoCLP.format(servicio.valorProducto),
+        ]);
+
+        autoTable(doc, {
+            head: [columns],
+            body: rows,
+            startY: y,
+            margin: { left: marginL, right: marginR },
+            theme: "grid",
+            headStyles: {
+                fillColor: gold,
+                textColor: [30, 30, 30],
+                fontStyle: "bold",
+                fontSize: 9,
+                cellPadding: 4,
+            },
+            bodyStyles: {
+                fontSize: 9,
+                cellPadding: 3.5,
+                textColor: textLight,
+                fillColor: darkBg,
+            },
+            alternateRowStyles: {
+                fillColor: darkCard,
+            },
+            columnStyles: {
+                0: { halign: "center", cellWidth: 14 },
+                1: { halign: "left", cellWidth: 72 },
+                2: { halign: "center", cellWidth: 28 },
+                3: { halign: "right", cellWidth: 30, fontStyle: "bold" },
+            },
+            styles: {
+                lineColor: darkBorder,
+                lineWidth: 0.3,
+            },
+        });
+
+        // Totales
+        let totalY = (doc.lastAutoTable?.finalY ?? y) + 6;
+        const totalBoxW = 80;
+        const totalBoxX = pageW - marginR - totalBoxW;
+
+        // Linea sutil
+        doc.setDrawColor(...darkBorder);
+        doc.setLineWidth(0.3);
+        doc.line(totalBoxX, totalY, pageW - marginR, totalY);
+
+        totalY += 7;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.setTextColor(...textMuted);
+        doc.text("Subtotal:", totalBoxX + 4, totalY);
+        doc.text(formatoCLP.format(totalPresupuesto), pageW - marginR - 4, totalY, { align: "right" });
+
+        if (valorFinalDescuento) {
+            totalY += 6;
+            const descuento = totalPresupuesto - Number(valorFinalDescuento);
+            const pctDescuento = totalPresupuesto > 0 ? Math.round((descuento / totalPresupuesto) * 100) : 0;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDim);
+            doc.text(`Descuento (${pctDescuento}%):`, totalBoxX + 4, totalY);
+            doc.text(`-${formatoCLP.format(descuento)}`, pageW - marginR - 4, totalY, { align: "right" });
+
+            totalY += 4;
+            doc.setDrawColor(...gold);
+            doc.setLineWidth(0.6);
+            doc.line(totalBoxX, totalY, pageW - marginR, totalY);
+
+            totalY += 7;
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(13);
+            doc.setTextColor(...gold);
+            doc.text("Total:", totalBoxX + 4, totalY);
+            doc.text(formatoCLP.format(Number(valorFinalDescuento)), pageW - marginR - 4, totalY, { align: "right" });
+        } else {
+            totalY += 4;
+            doc.setDrawColor(...gold);
+            doc.setLineWidth(0.6);
+            doc.line(totalBoxX, totalY, pageW - marginR, totalY);
+
+            totalY += 7;
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(13);
+            doc.setTextColor(...gold);
+            doc.text("Total:", totalBoxX + 4, totalY);
+            doc.text(formatoCLP.format(totalPresupuesto), pageW - marginR - 4, totalY, { align: "right" });
+        }
+
+        // Nota clinica
+        totalY += 14;
+        doc.setFont("helvetica", "italic");
+        doc.setFontSize(8);
+        doc.setTextColor(...textDim);
+        doc.text("* Los valores indicados son referenciales y pueden variar segun evaluacion clinica.", marginL, totalY);
+        doc.text("* Este presupuesto tiene una validez de 30 dias desde la fecha de emision.", marginL, totalY + 4);
+
+        // Footer
+        const footerY = pageH - 14;
+        doc.setDrawColor(...darkBorder);
+        doc.setLineWidth(0.3);
+        doc.line(marginL, footerY - 4, pageW - marginR, footerY - 4);
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(8);
+        doc.setTextColor(...gold);
+        doc.text("Dra. Andrea Morán Rojas", marginL, footerY);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(7);
+        doc.setTextColor(...textDim);
+        doc.text("Rehabilitación oral y armonización facial", marginL, footerY + 4);
+
+        doc.setFontSize(7);
+        doc.text("Documento generado digitalmente", pageW - marginR, footerY, { align: "right" });
+        doc.text(`Pagina 1 de 1`, pageW - marginR, footerY + 4, { align: "right" });
+
+        doc.save("presupuesto-tratamiento-facial.pdf");
+    }
 
 
 
@@ -457,8 +712,8 @@ export default function PresupuestoTratamiento() {
                                 <span className="text-xl font-bold text-slate-800">{formatoCLP.format(totalPresupuesto)}</span>
                             </div>
 
-                            {/* Boton descargar PDF */}
-                            <div className="px-5 py-3 border-t border-slate-100">
+                            {/* Botones descargar PDF */}
+                            <div className="px-5 py-3 border-t border-slate-100 space-y-2">
                                 <button
                                     onClick={descargarPresupuestoPDF}
                                     disabled={listaPresupuesto.length === 0}
@@ -467,7 +722,17 @@ export default function PresupuestoTratamiento() {
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
                                     </svg>
-                                    Descargar PDF
+                                    Presupuesto Dentales
+                                </button>
+                                <button
+                                    onClick={descargarPresupuestoPDFBlack}
+                                    disabled={listaPresupuesto.length === 0}
+                                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-amber-100 bg-gradient-to-r from-neutral-800 to-neutral-700 rounded-lg hover:from-neutral-900 hover:to-neutral-800 transition-all duration-150 shadow-md hover:shadow-lg disabled:opacity-40 disabled:cursor-not-allowed border border-amber-700/30"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+                                    </svg>
+                                    Presupuesto Tratamientos Faciales
                                 </button>
                             </div>
                         </div>
