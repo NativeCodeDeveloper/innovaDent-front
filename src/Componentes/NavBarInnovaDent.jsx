@@ -24,7 +24,7 @@ const topBarLinks = [
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/innovadent", label: "Instagram" },
   { icon: Facebook, href: "https://www.facebook.com/innovadent", label: "Facebook" },
-  { icon: WhatsAppIcon, href: "https://wa.me/56956480103", label: "WhatsApp" },
+  { icon: WhatsAppIcon, href: "https://wa.me/56987321055", label: "WhatsApp" },
 ];
 
 const navItems = [

@@ -105,8 +105,8 @@ export default function FormularioContacto() {
                             </div>
                             <div className="min-w-0">
                                 <p className="text-sm sm:text-base font-bold text-slate-900">WhatsApp</p>
-                                <a href="https://wa.me/56977173029" target="_blank" className="mt-1 inline-block text-emerald-500 font-bold text-base sm:text-lg tracking-tight hover:opacity-80">
-                                    +56977173029
+                                <a href="https://wa.me/56987321055" target="_blank" className="mt-1 inline-block text-emerald-500 font-bold text-base sm:text-lg tracking-tight hover:opacity-80">
+                                    +56 9 8732 1055
                                 </a>
                             </div>
                         </div>

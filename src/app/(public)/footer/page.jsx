@@ -148,12 +148,12 @@ export default function Footer() {
                             <li className="flex items-center gap-3">
                                 <WhatsAppIcon className="h-5 w-5 flex-none text-teal-400" />
                                 <a
-                                    href="https://wa.me/56956480103"
+                                    href="https://wa.me/56987321055"
                                     className="hover:text-white transition-colors"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    WhatsApp
+                                    +56 9 8732 1055
                                 </a>
                             </li>
                         </ul>
